@@ -2,9 +2,8 @@ import { useEffect, useState } from 'react'
 import './App.css'
 
 function App() {
-  const API_URL = import.meta.env.API_URL
-  console.log(API_URL)
   const [users, setUsers] = useState([])
+  const API_URL = `${import.meta.env.VITE_API_URL}`
 
   useEffect(() => {
     fetch(`${API_URL}/reviews`)
