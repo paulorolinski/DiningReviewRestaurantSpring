@@ -1,35 +1,34 @@
 package com.example.DiningReviewRestaurantSpring.resources;
 
-import com.example.DiningReviewRestaurantSpring.entities.User;
-import com.example.DiningReviewRestaurantSpring.services.UserService;
+import com.example.DiningReviewRestaurantSpring.entities.Restaurant;
+import com.example.DiningReviewRestaurantSpring.services.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
-public class UserController {
+@RequestMapping("restaurants")
+public class RestaurantController {
 
     @Autowired
-    UserService service;
+    RestaurantService service;
 
     @GetMapping
-    public ResponseEntity<List<User>> findAll() {
-        List<User> list = service.findAll();
+    public ResponseEntity<List<Restaurant>> findAll() {
+        List<Restaurant> list = service.findAll();
         return ResponseEntity.ok().body(list);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<User> findById(@PathVariable Long id) {
-        User obj = service.findById(id);
+    public ResponseEntity<Restaurant> findById(@PathVariable Long id) {
+        Restaurant obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
     }
 
     @PostMapping
-    public ResponseEntity<User> insert(@RequestBody User obj) {
+    public ResponseEntity<Restaurant> insert(@RequestBody Restaurant obj) {
         obj = service.insert(obj);
         return ResponseEntity.ok().body(obj);
     }
@@ -41,7 +40,7 @@ public class UserController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<User> update(@PathVariable Long id, @RequestBody User obj) {
+    public ResponseEntity<Restaurant> update(@PathVariable Long id, @RequestBody Restaurant obj) {
         obj = service.update(id, obj);
         return ResponseEntity.ok().body(obj);
     }

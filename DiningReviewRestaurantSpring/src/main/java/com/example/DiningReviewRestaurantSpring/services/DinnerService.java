@@ -1,34 +1,32 @@
 package com.example.DiningReviewRestaurantSpring.services;
 
-import com.example.DiningReviewRestaurantSpring.entities.User;
-import com.example.DiningReviewRestaurantSpring.repositories.UserRepository;
+import com.example.DiningReviewRestaurantSpring.entities.Dinner;
+import com.example.DiningReviewRestaurantSpring.repositories.DinnerRepository;
 import com.example.DiningReviewRestaurantSpring.services.exceptions.DatabaseException;
 import com.example.DiningReviewRestaurantSpring.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserService {
+public class DinnerService {
 
     @Autowired
-    private UserRepository repository;
+    private DinnerRepository repository;
 
-    public List<User> findAll() {
+    public List<Dinner> findAll() {
         return repository.findAll();
     }
 
-    public User findById(Long id) {
-        Optional<User> obj = repository.findById(id);
+    public Dinner findById(Long id) {
+        Optional<Dinner> obj = repository.findById(id);
         return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
-    public User insert(User obj) {
+    public Dinner insert(Dinner obj) {
         return repository.save(obj);
     }
 
@@ -44,20 +42,18 @@ public class UserService {
         }
     }
 
-    public User update(Long id, User obj) {
+    public Dinner update(Long id, Dinner obj) {
         if (repository.existsById(id)) {
-            User entity = repository.getReferenceById(id);
+            Dinner entity = repository.getReferenceById(id);
             updateData(entity, obj);
             return repository.save(entity);
         }
         return null;
     }
 
-    public void updateData(User entity, User obj) {
+    public void updateData(Dinner entity, Dinner obj) {
         entity.setName(obj.getName());
-        entity.setEmail(obj.getEmail());
-        entity.setPhone(obj.getPhone());
-        entity.setRole(obj.getRole());
-        entity.setLogin(obj.getLogin());
+        entity.setPrice(obj.getPrice());
+        entity.setImgUrl(obj.getImgUrl());
     }
 }

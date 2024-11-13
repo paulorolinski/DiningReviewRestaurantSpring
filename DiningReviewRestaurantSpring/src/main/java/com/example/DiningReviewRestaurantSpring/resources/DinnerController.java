@@ -1,35 +1,34 @@
 package com.example.DiningReviewRestaurantSpring.resources;
 
-import com.example.DiningReviewRestaurantSpring.entities.User;
-import com.example.DiningReviewRestaurantSpring.services.UserService;
+import com.example.DiningReviewRestaurantSpring.entities.Dinner;
 import org.springframework.beans.factory.annotation.Autowired;
+import com.example.DiningReviewRestaurantSpring.services.DinnerService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
-public class UserController {
+@RequestMapping("dinners")
+public class DinnerController {
 
     @Autowired
-    UserService service;
+    DinnerService service;
 
     @GetMapping
-    public ResponseEntity<List<User>> findAll() {
-        List<User> list = service.findAll();
+    public ResponseEntity<List<Dinner>> findAll() {
+        List<Dinner> list = service.findAll();
         return ResponseEntity.ok().body(list);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<User> findById(@PathVariable Long id) {
-        User obj = service.findById(id);
+    public ResponseEntity<Dinner> findById(@PathVariable Long id) {
+        Dinner obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
     }
 
     @PostMapping
-    public ResponseEntity<User> insert(@RequestBody User obj) {
+    public ResponseEntity<Dinner> insert(@RequestBody Dinner obj) {
         obj = service.insert(obj);
         return ResponseEntity.ok().body(obj);
     }
@@ -41,7 +40,7 @@ public class UserController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<User> update(@PathVariable Long id, @RequestBody User obj) {
+    public ResponseEntity<Dinner> update(@PathVariable Long id, @RequestBody Dinner obj) {
         obj = service.update(id, obj);
         return ResponseEntity.ok().body(obj);
     }

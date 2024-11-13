@@ -1,5 +1,6 @@
 package com.example.DiningReviewRestaurantSpring.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,4 +21,12 @@ public class Review implements Serializable {
     private Long id;
     private String comment;
     private Double rating;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "dinner_id")
+    private Dinner plate;
 }
