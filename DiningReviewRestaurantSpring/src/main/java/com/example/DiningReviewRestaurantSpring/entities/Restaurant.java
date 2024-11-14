@@ -24,6 +24,7 @@ public class Restaurant {
     private String name;
     private String cep;
     private String address;
+    private String imgUrl;
 
     @JsonIgnore
     @OneToMany(mappedBy = "restaurant")

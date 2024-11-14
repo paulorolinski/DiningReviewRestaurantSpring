@@ -55,5 +55,6 @@ public class RestaurantService {
         entity.setName(obj.getName());
         entity.setCep(obj.getCep());
         entity.setAddress((obj.getAddress()));
+        entity.setImgUrl(obj.getImgUrl());
     }
 }

@@ -13,12 +13,18 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+body::-webkit-scrollbar {
+  width: 12px;
+}
+
+body::-webkit-scrollbar-track {
+  background: #242424;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #747bff;
+  border-radius: 20px;
+  border: 3px solid #242424;  
 }
 
 h1 {
@@ -63,4 +69,31 @@ button:focus-visible {
   margin-top: 5%;
   border: #646cff solid 4px;
   padding: 20px 50px 20px;
+}
+
+nav a { 
+  margin-left: 10%;
+  text-decoration: none;
+  color: #747bff;
+  font-size: large;
+}
+
+#layout {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+header {
+  display: flex;
+}
+
+header img:hover {
+  cursor: pointer;
+}
+
+header h1 {
+  position: relative;
+  margin: 0 auto;
+  padding-top: 2%;
 }
