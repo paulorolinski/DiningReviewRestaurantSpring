@@ -1,25 +1,38 @@
+import Header from "../components/Header";
+import { useLocation } from "react-router-dom";
 import useReviews from "../hooks/reviews";
+
 export default function Review() {
-  const { reviews } = useReviews();
+  const location = useLocation();
+  const { selectedPlate } = location.state || {};
+  const { reviews } = useReviews()
+
+  console.log(selectedPlate.id);
+  console.log(reviews.map((review) => review.plate.id == selectedPlate.id))
+
+  const filteredReviews = reviews.filter(
+    (review) => review.plate.id === selectedPlate.id
+  );
+  
   return (
     <>
-      <header>
-        <a href="/dinners">
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/5774/5774594.png"
-            alt="voltar"
-            style={{ width: 50, height: 50 }}
-          />
-        </a>
-        <h1>Reviews</h1>
-      </header>
-      <ul>
-        {reviews.map((review) => (
-          <li className="itemLista" key={review.id}>
-            {review.user.name}: {review.comment}
-          </li>
-        ))}
-      </ul>
+      <Header></Header>
+      <h2>
+       Reviews sobre <a style={{ color: "red" }}>{selectedPlate.name}</a>
+      </h2>
+      <div>
+        {filteredReviews.length > 0 ? (
+        <div>
+          {filteredReviews.map((review) => (
+          <ul>
+            <li key={review.plate.id}>{review.user.name} - {review.comment} - {review.rating} estrelas</li>
+          </ul>
+          ))}
+        </div>
+        ) : (
+          <p>Não há reviews sobre esse prato!</p>
+        )}
+      </div>
     </>
   );
 }

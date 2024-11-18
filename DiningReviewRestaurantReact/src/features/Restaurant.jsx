@@ -1,26 +1,33 @@
 import useRestaurant from "../hooks/restaurants";
-import useDinner from "../hooks/dinner";
 import "../assets/restaurant.css";
+import "../components/Header";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 export default function Restaurant() {
-  const { restaurants } = useRestaurant();
-  const { dinners } = useDinner();
-  const [selectRestaurant, setSelectRestaurant] = useState(null)
+  const { restaurants } = useRestaurant()
+  const navigate = useNavigate()
+  const [selectedRestaurant, setSelectRestaurant] = useState(null)
+  
 
   const handleCardClick = (restaurant) => {
-    setSelectRestaurant(restaurant)
+    setSelectRestaurant(restaurant);
     console.log(restaurant);
-    
-  }
+    navigate("/dinners", { state: { selectedRestaurant: restaurant } });
+  };
   return (
     <>
       <header>
         <h1>Restaurants</h1>
       </header>
-      <div style={{ margin: 100}} className="flex-container">
+      <div style={{ margin: 100 }} className="flex-container">
         <div className="cards">
           {restaurants.map((restaurant) => (
-            <div className="card" key={restaurant.id} onClick={() => handleCardClick(restaurant)}>
+            <div
+              className="card"
+              key={restaurant.id}
+              onClick={() => handleCardClick(restaurant)}
+            >
               <img
                 className="img"
                 src={restaurant.imgUrl}
@@ -35,21 +42,6 @@ export default function Restaurant() {
             </div>
           ))}
         </div>
-      </div>
-      <div>
-      {selectRestaurant && (
-          <div className="modal">
-            <h2>Dinners at {selectRestaurant.name}</h2>
-            <ul>
-              {dinners.map(dinner => (
-                <li key={dinner.id}>
-                  <img src={dinner.imgUrl} alt={dinner.name} />
-                  <p>{dinner.name} - ${dinner.price}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
       </div>
     </>
   );

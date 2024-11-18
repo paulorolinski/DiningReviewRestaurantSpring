@@ -1,25 +1,48 @@
-import useDinners from "../hooks/dinner";
+import Header from "../components/Header";
+import { useLocation } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 export default function Review() {
-  const { dinners } = useDinners();
+  const location = useLocation();
+  const { selectedRestaurant } = location.state || {};
+  const [selectedPlate, setSelectedPlate] = useState(null)
+  const navigate = useNavigate()
+
+  const handleCardClick = (plate) => {
+    setSelectedPlate(plate)
+    navigate("/reviews", { state: { selectedPlate: plate } });
+  }
+
   return (
     <>
-      <header>
-        <a href="/">
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/5774/5774594.png"
-            alt="voltar"
-            style={{ width: 50, height: 50 }}
-          />
-        </a>
-        <h1>Dinners</h1>
-      </header>
-      <ul>
-        {dinners.map((dinner) => (
-          <li className="itemLista" key={dinner.id}>
-            {dinner.name}: {dinner.price}
-          </li>
-        ))}
-      </ul>
+      <Header></Header>
+      <h2>
+        Jantares em <a style={{ color: "red" }}>{selectedRestaurant.name}</a>
+      </h2>
+      <div style={{ margin: 100 }} className="flex-container">
+        {selectedRestaurant.plates != 0 ? (
+          <div className="cards">
+            {selectedRestaurant.plates.map((plate) => (
+              <div className="card" key={plate.id} onClick={() => handleCardClick(plate)}>
+                <img
+                  className="img"
+                  src={plate.imgUrl}
+                  style={{ width: 250 }}
+                />
+                <div>
+                  <h4>
+                    <b>{plate.name}</b>
+                  </h4>
+                  <p>{plate.price} reais</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p>Não existem jantares registrados nesse Restaurante</p>
+        )}
+      </div>
     </>
   );
 }

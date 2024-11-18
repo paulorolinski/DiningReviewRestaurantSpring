@@ -6,6 +6,6 @@ export default {
     },
 
     getRestaurantById(id) {
-        return apiClient.get(`resturants/${id}`)
+        return apiClient.get(`restaurants/${id}`)
     }
 }
