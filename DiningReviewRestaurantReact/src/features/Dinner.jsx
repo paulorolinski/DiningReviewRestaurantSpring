@@ -1,30 +1,37 @@
 import Header from "../components/Header";
 import { useLocation } from "react-router-dom";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Review() {
   const location = useLocation();
   const { selectedRestaurant } = location.state || {};
-  const [selectedPlate, setSelectedPlate] = useState(null)
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleCardClick = (plate) => {
-    setSelectedPlate(plate)
-    navigate("/reviews", { state: { selectedPlate: plate } });
-  }
+    navigate("/reviews", {
+      state: { selectedPlate: plate, selectedRestaurant },
+    });
+  };
 
   return (
     <>
-      <Header></Header>
-      <h2>
-        Jantares em <a style={{ color: "red" }}>{selectedRestaurant.name}</a>
-      </h2>
+      <header>
+        <div onClick={() => navigate("/")}>
+          <Header></Header>
+        </div>
+        <h2 className="header">
+          Jantares em <a>{selectedRestaurant.name}</a>
+        </h2>
+      </header>
       <div style={{ margin: 100 }} className="flex-container">
         {selectedRestaurant.plates != 0 ? (
           <div className="cards">
             {selectedRestaurant.plates.map((plate) => (
-              <div className="card" key={plate.id} onClick={() => handleCardClick(plate)}>
+              <div
+                className="card"
+                key={plate.id}
+                onClick={() => handleCardClick(plate)}
+              >
                 <img
                   className="img"
                   src={plate.imgUrl}
@@ -32,15 +39,21 @@ export default function Review() {
                 />
                 <div>
                   <h4>
-                    <b>{plate.name}</b>
+                    <b>
+                      <a>Jantar:</a> {plate.name}
+                    </b>
                   </h4>
-                  <p>{plate.price} reais</p>
+                  <p>
+                    <a>Preço:</a> {plate.price} reais
+                  </p>
                 </div>
               </div>
             ))}
           </div>
         ) : (
-          <p>Não existem jantares registrados nesse Restaurante</p>
+          <p className="not-exists">
+            Não existem jantares registrados nesse Restaurante
+          </p>
         )}
       </div>
     </>

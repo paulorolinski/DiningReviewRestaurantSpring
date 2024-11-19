@@ -1,17 +1,14 @@
 import useRestaurant from "../hooks/restaurants";
 import "../assets/restaurant.css";
 import "../components/Header";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Restaurant() {
   const { restaurants } = useRestaurant()
   const navigate = useNavigate()
-  const [selectedRestaurant, setSelectRestaurant] = useState(null)
   
 
   const handleCardClick = (restaurant) => {
-    setSelectRestaurant(restaurant);
     console.log(restaurant);
     navigate("/dinners", { state: { selectedRestaurant: restaurant } });
   };
