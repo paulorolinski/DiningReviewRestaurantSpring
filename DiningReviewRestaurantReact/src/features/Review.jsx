@@ -38,7 +38,7 @@ export default function Review() {
               <div className="card-review" key={review.id}>
                 <div className="user">
                   <IoPersonCircleSharp className="icon-profile" size={50} />
-                  <p style={{ paddingLeft: 10 }}>{review.user.name}</p>
+                  <p style={{ paddingLeft: 10 }}>{review.user.username}</p>
                 </div>
                 <div className="content-review">
                   <div>

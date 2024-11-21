@@ -6,17 +6,17 @@
 
 .card {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
   width: 250px;
-  height: 298px;
+  min-height: 298px;
   position: relative;
-  box-shadow: 0 10px 20px 0 rgb(18, 3, 35);
+  box-shadow: 0 10px 20px 0 linear-gradient(163deg, #00ff75 0%, #3700ff 100%);
   transition: 0.3s;
-  border-radius: 2%;
-  background-color: rgb(0, 0, 0);
   border-style: ridge;
-  border-color:darkslateblue;
+  background-color: black;
+  border-image: linear-gradient(163deg, #00ff75 0%, #3700ff 100%);
+  border-image-slice: 1;
 }
 
 .card:nth-child(3n) {
@@ -25,11 +25,11 @@
 
 .img {
   border-radius: 2% 2% 0 0;
-  padding-top: 0;
 }
 
 .card:hover {
-  box-shadow: 0 2px 50px 10px rgba(35, 7, 74, 0.9);
+  box-shadow: 0px 0px 30px 1px rgba(0, 255, 117, 0.30);
   cursor: pointer;
   /* filter:opacity(0); */
+  transform: scale(0.98);
 }

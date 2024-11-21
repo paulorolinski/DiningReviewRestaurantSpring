@@ -30,7 +30,6 @@ body::-webkit-scrollbar-thumb {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
-  transform: rotate(320px);
 }
 
 @media (prefers-color-scheme: light) {
@@ -78,7 +77,6 @@ a {
 
 .icon-back:hover {
   cursor: pointer;
-  filter: blur(100);
 }
 
 .header {
