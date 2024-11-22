@@ -10,6 +10,22 @@
   border-image: linear-gradient(163deg, #ffeba7 0%, #87d443 100%);
   background-origin: border-box;
   border-image-slice: 1;
+  animation: card 4s linear;
+}
+
+@keyframes card {
+  25% {
+    filter: opacity(0%);
+  }
+  50% {
+    filter: opacity(25%);
+  }
+  75% {
+    filter: opacity(50%);
+  }
+  100% {
+    filter: opacity(100%);
+  }
 }
 
 /*Inputs*/
@@ -86,7 +102,7 @@
 }
 
 .content {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
 }

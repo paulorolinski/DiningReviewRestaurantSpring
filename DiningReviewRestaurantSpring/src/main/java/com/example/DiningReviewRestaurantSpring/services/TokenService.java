@@ -1,4 +1,4 @@
-package com.example.DiningReviewRestaurantSpring.infra.security;
+package com.example.DiningReviewRestaurantSpring.services;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -40,7 +40,7 @@ public class TokenService {
                     .verify(token)
                     .getSubject();
         } catch(JWTVerificationException e) {
-            return "";
+            throw new RuntimeException("Error while validate token", e);
         }
 
     }

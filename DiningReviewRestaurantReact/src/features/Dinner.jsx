@@ -16,7 +16,7 @@ export default function Review() {
   return (
     <>
       <header>
-        <div onClick={() => navigate("/")}>
+        <div onClick={() => navigate("/restaurants")}>
           <Header></Header>
         </div>
         <h2 className="header">

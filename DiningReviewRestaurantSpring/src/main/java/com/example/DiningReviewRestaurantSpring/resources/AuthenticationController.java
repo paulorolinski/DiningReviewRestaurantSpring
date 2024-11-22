@@ -1,10 +1,11 @@
 package com.example.DiningReviewRestaurantSpring.resources;
 
 import com.example.DiningReviewRestaurantSpring.entities.DTO.AuthenticationDTO;
+import com.example.DiningReviewRestaurantSpring.entities.DTO.LoginResponseDTO;
 import com.example.DiningReviewRestaurantSpring.entities.DTO.RegisterDTO;
 import com.example.DiningReviewRestaurantSpring.entities.User;
+import com.example.DiningReviewRestaurantSpring.services.TokenService;
 import com.example.DiningReviewRestaurantSpring.repositories.UserRepository;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,12 +23,17 @@ public class AuthenticationController {
     @Autowired
     private UserRepository repository;
 
+    @Autowired
+    private TokenService tokenService;
+
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody @Validated AuthenticationDTO data){
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
-        return ResponseEntity.ok().build();
+        var token = tokenService.generateToken((User) auth.getPrincipal());
+
+        return ResponseEntity.ok(new LoginResponseDTO(token));
     }
 
     @PostMapping("/register")
