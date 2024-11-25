@@ -10,7 +10,7 @@
   width: 250px;
   height: 298px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.9);
-  background-color: #f1e9e9;
+  background-color: #b7b0b0;
   color: black;
   transition: 0.3s;
   border-radius: 20%;
@@ -34,8 +34,7 @@
 }
 
 .icon-star {
-  color: yellow;
-  background-color: aqua;
+  color: rgb(246, 246, 6);
 }
 
 .content-review {

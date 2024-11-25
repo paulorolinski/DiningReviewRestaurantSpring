@@ -4,12 +4,10 @@ import { BsFillTelephoneFill } from "react-icons/bs";
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdAlternateEmail } from "react-icons/md";
-import Unauthorized from "../components/Unauthorized";
 
 export default function Login() {
   return (
     <>
-    <Unauthorized />
       <div className="content">
         <div className="card-login">
           <p className="title">Register</p>
@@ -22,7 +20,7 @@ export default function Login() {
                 className="input-field"
                 placeholder="Username"
                 id="logemail"
-                autocomplete="off"
+                autoComplete="off"
               />
             </div>
             <div className="field">
@@ -33,7 +31,7 @@ export default function Login() {
                 className="input-field"
                 placeholder="Email"
                 id="logemail"
-                autocomplete="off"
+                autoComplete="off"
               />
             </div>
             <div className="field">
@@ -44,7 +42,7 @@ export default function Login() {
                 className="input-field"
                 placeholder="Telefone"
                 id="logTel"
-                autocomplete="off"
+                autoComplete="off"
               />
             </div>
             <div className="field">
@@ -55,7 +53,7 @@ export default function Login() {
                 className="input-field"
                 placeholder="Password"
                 id="logpass"
-                autocomplete="off"
+                autoComplete="off"
               />
             </div>
             <div className="field">
@@ -66,7 +64,7 @@ export default function Login() {
                 className="input-field"
                 placeholder="Repeat password"
                 id="logpass"
-                autocomplete="off"
+                autoComplete="off"
               />
             </div>
             <button type="submit" className="btn">

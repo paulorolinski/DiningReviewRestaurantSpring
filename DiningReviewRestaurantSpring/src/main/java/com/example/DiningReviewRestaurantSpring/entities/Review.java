@@ -1,5 +1,6 @@
 package com.example.DiningReviewRestaurantSpring.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
@@ -20,6 +21,7 @@ public class Review implements Serializable {
     private String comment;
     private Double rating;
 
+    @JsonIgnoreProperties("authority")
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
