@@ -10,7 +10,7 @@
   border-image: linear-gradient(163deg, #ffeba7 0%, #87d443 100%);
   background-origin: border-box;
   border-image-slice: 1;
-  animation: card 4s linear;
+  animation: card 3s linear;
 }
 
 @keyframes card {

@@ -1,25 +1,33 @@
 import "../assets/login.css";
-import Pyramid from "../components/Pyramid";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdAlternateEmail } from "react-icons/md";
 
-export default function Login() {
+export default function Register() {
+  function handleSubmit(e) {
+    e.preventDefault()
+    const login = e.target.login.value
+    const email = e.target.logemail.value
+    const tel = e.target.logtel.value
+    const pass = e.target.logpass.value
+    const verPass = e.target.logverpass.value
+    console.log(login, email, tel, pass, verPass);
+  }
   return (
     <>
       <div className="content">
         <div className="card-login">
           <p className="title">Register</p>
-          <form>
+          <form onSubmit={handleSubmit} action="post">
             <div className="field">
             <MdAlternateEmail className="input-icon"/>
               <input
                 type="text"
-                name="logemail"
+                name="login"
                 className="input-field"
                 placeholder="Username"
-                id="logemail"
+                id="login"
                 autoComplete="off"
               />
             </div>
@@ -41,7 +49,7 @@ export default function Login() {
                 name="logTel"
                 className="input-field"
                 placeholder="Telefone"
-                id="logTel"
+                id="logtel"
                 autoComplete="off"
               />
             </div>
@@ -54,6 +62,7 @@ export default function Login() {
                 placeholder="Password"
                 id="logpass"
                 autoComplete="off"
+                required
               />
             </div>
             <div className="field">
@@ -63,8 +72,9 @@ export default function Login() {
                 name="logpass"
                 className="input-field"
                 placeholder="Repeat password"
-                id="logpass"
+                id="logverpass"
                 autoComplete="off"
+                required
               />
             </div>
             <button type="submit" className="btn">
@@ -75,7 +85,6 @@ export default function Login() {
             </a>
           </form>
         </div>
-        <Pyramid />
       </div>
     </>
   );

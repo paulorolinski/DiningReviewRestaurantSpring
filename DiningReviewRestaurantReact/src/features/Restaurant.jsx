@@ -2,11 +2,11 @@ import useRestaurant from "../hooks/restaurants";
 import "../assets/restaurant.css";
 import "../components/Header";
 import { useNavigate } from "react-router-dom";
+import Logout from "../components/Logout";
 
 export default function Restaurant() {
   const { restaurants } = useRestaurant()
   const navigate = useNavigate()
-  
 
   const handleCardClick = (restaurant) => {
     console.log(restaurant);
@@ -15,7 +15,8 @@ export default function Restaurant() {
   return (
     <>
       <header>
-        <h1>Restaurants</h1>
+        <h1 class>Restaurants</h1>
+        <Logout />
       </header>
       <div style={{ margin: 100 }} className="flex-container">
         <div className="cards">

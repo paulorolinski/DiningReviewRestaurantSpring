@@ -5,6 +5,7 @@ import "../assets/review.css";
 import { MdOutlineStar } from "react-icons/md";
 import { IoPersonCircleSharp } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
+import Logout from "../components/Logout";
 
 export default function Review() {
   const location = useLocation()
@@ -30,6 +31,7 @@ export default function Review() {
           Avaliações sobre <a>{selectedPlate.name}</a> em{" "}
           <a>{selectedRestaurant.name}</a> - <a>{selectedRestaurant.cep}</a>
         </h2>
+        <Logout />
       </header>
       <div style={{ margin: 100 }} className="flex-container">
         {filteredReviews.length > 0 ? (

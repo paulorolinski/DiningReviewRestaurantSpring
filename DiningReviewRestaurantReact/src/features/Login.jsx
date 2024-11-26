@@ -1,27 +1,33 @@
 import "../assets/login.css";
-import Pyramid from "../components/Pyramid";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdAlternateEmail } from "react-icons/md";
 import signIn from "../service/auth/auth";
-import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import Anauthorized from "../components/Unauthorized"
+import Unauthorized from "../components/Unauthorized";
 
 export default function Login() {
-  const[open, setOpen] = useState(false)
-    function popup() {
-        setOpen(true);
-    }
-    
-  const [error, setError] = useState(false)
+  const navigate = useNavigate();
+  const { opened } = location.state || { opened: false };
+  const [open, setOpen] = useState(opened);
 
-  function handleSubmit(e) {
-    e.preventDefault()
-    const login = e.target.loguser.value
-    const password = e.target.logpass.value
-    signIn(login, password)
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const login = e.target.loguser.value;
+    const password = e.target.logpass.value;
+    await signIn(login, password);
+    checkToken();
   }
+
+  function checkToken() {
+    const token = document.cookie.valueOf("token")
+    if (token) {
+      navigate("/restaurants");
+    } else {
+      setOpen(true);
+    }
+  }
+
   return (
     <>
       <div className="content">
@@ -58,8 +64,8 @@ export default function Login() {
             </a>
           </form>
         </div>
-        <Pyramid />
       </div>
+      {open && <Unauthorized open={open} setOpen={setOpen}/>}
     </>
   );
 }

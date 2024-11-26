@@ -7,17 +7,21 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 
-export default function Unauthorized() {
-  const [open, setClose] = useState();
+export default function Unauthorized({open, setOpen}) {
   const navigate = useNavigate();
 
   const handleClose = () => {
-    setClose(true);
-  };
+    setOpen(false)
+    navigate("/login", { state: { opened: open}})
+  }
+
+  const handleNewAccount = () => {
+    navigate("/register")
+  }
 
   return (
     <>
-        <Dialog open={open} onClick={handleClose}>
+        <Dialog open={open} onClose={handleClose}>
           <DialogTitle>{"Não autorizado!"}</DialogTitle>
           <DialogContent>
             <DialogContentText>
@@ -28,7 +32,7 @@ export default function Unauthorized() {
               <Button onClick={handleClose} autoFocus>
                 Fechar
               </Button>
-              <Button onClick={navigate("/register")}>Nova Conta</Button>
+              <Button onClick={handleNewAccount}>Nova Conta</Button>
             </DialogActions>
           </DialogContent>
         </Dialog>

@@ -54,7 +54,6 @@ h1 {
 header {
   display: flex;
   flex-direction: row;
-  align-items: center;
   position: relative;
 }
 

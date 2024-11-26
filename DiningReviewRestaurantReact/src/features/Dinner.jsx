@@ -1,6 +1,7 @@
 import Header from "../components/Header";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import Logout from "../components/Logout";
 
 export default function Review() {
   const location = useLocation();
@@ -22,6 +23,7 @@ export default function Review() {
         <h2 className="header">
           Jantares em <a>{selectedRestaurant.name}</a>
         </h2>
+        <Logout />
       </header>
       <div style={{ margin: 100 }} className="flex-container">
         {selectedRestaurant.plates != 0 ? (
