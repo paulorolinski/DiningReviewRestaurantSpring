@@ -3,6 +3,8 @@ import "../assets/restaurant.css";
 import "../components/Header";
 import { useNavigate } from "react-router-dom";
 import Logout from "../components/Logout";
+import { useEffect, useState } from "react";
+import isAuthenticated from "../service/auth/isAuthenticated"
 
 export default function Restaurant() {
   const { restaurants } = useRestaurant()
@@ -12,13 +14,18 @@ export default function Restaurant() {
     console.log(restaurant);
     navigate("/dinners", { state: { selectedRestaurant: restaurant } });
   };
+
+  useEffect(() => {
+    isAuthenticated
+  }, []);
+
   return (
     <>
       <header>
-        <h1 class>Restaurants</h1>
+        <h1>Restaurants</h1>
         <Logout />
       </header>
-      <div style={{ margin: 100 }} className="flex-container">
+      <div style={{ margin: 100 }} className="flex-container" update={update}>
         <div className="cards">
           {restaurants.map((restaurant) => (
             <div

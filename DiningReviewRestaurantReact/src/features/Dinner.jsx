@@ -20,9 +20,9 @@ export default function Review() {
         <div onClick={() => navigate("/restaurants")}>
           <Header></Header>
         </div>
-        <h2 className="header">
+        <h1 className="header">
           Jantares em <a>{selectedRestaurant.name}</a>
-        </h2>
+        </h1>
         <Logout />
       </header>
       <div style={{ margin: 100 }} className="flex-container">

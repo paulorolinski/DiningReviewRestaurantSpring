@@ -30,9 +30,11 @@ public class User implements UserDetails {
     private String password;
     private UserRole role;
 
-    public User(String login, String password, UserRole role) {
+    public User(String login, String password, String email, String phone, UserRole role) {
         this.login = login;
         this.password = password;
+        this.email = email;
+        this.phone = phone;
         this.role = role;
     }
 

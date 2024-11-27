@@ -1,7 +1,8 @@
 import "../assets/login.css";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdAlternateEmail } from "react-icons/md";
-import signIn from "../service/auth/auth";
+import signIn from "../service/auth/signIn";
+import checkToken from "../service/auth/checkToken";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Unauthorized from "../components/Unauthorized";
@@ -16,13 +17,8 @@ export default function Login() {
     const login = e.target.loguser.value;
     const password = e.target.logpass.value;
     await signIn(login, password);
-    checkToken();
-  }
-
-  function checkToken() {
-    const token = document.cookie.valueOf("token")
-    if (token) {
-      navigate("/restaurants");
+    if (checkToken()) {
+      navigate("/restaurants")
     } else {
       setOpen(true);
     }
@@ -65,7 +61,7 @@ export default function Login() {
           </form>
         </div>
       </div>
-      {open && <Unauthorized open={open} setOpen={setOpen}/>}
+      {open && <Unauthorized open={open} setOpen={setOpen} />}
     </>
   );
 }

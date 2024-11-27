@@ -29,7 +29,6 @@ body::-webkit-scrollbar-thumb {
 
 h1 {
   font-size: 3.2em;
-  line-height: 1.1;
 }
 
 @media (prefers-color-scheme: light) {
@@ -55,12 +54,12 @@ header {
   display: flex;
   flex-direction: row;
   position: relative;
+  margin-top: 2%;
 }
 
 header h1 {
   position: relative;
   margin: 0 auto;
-  padding-top: 2%;
 }
 
 a {

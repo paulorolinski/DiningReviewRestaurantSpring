@@ -27,7 +27,7 @@ public class Restaurant {
     private String address;
     private String imgUrl;
 
-    @JsonIgnoreProperties("plates")
+    @JsonIgnoreProperties("restaurant")
     @OneToMany(mappedBy = "restaurant")
     Set<Dinner> plates = new HashSet<>();
 }
