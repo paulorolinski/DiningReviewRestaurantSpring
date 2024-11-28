@@ -4,15 +4,9 @@ import Register from "../features/Register";
 import Restaurant from "../features/Restaurant";
 import Dinner from "../features/Dinner";
 import Review from "../features/Review";
-// import Login from "../features/Login";
 import Home from "../features/Home";
 import NotFound from "../features/NotFound";
 import ProtectedRoute from "./ProtectedRoute";
-import isAuthenticated from "../service/auth/isAuthenticated";
-
-const Authenticated = () => {
-  return isAuthenticated()
-};
 
 const router = createBrowserRouter([
   {
@@ -31,7 +25,7 @@ const router = createBrowserRouter([
     index: true,
   },
   {
-    element: <ProtectedRoute isAuthenticated={Authenticated()} />,
+    element: <ProtectedRoute/>,
     children: [
       {
         path: "/restaurants",

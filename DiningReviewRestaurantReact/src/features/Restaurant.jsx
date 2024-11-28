@@ -3,21 +3,24 @@ import "../assets/restaurant.css";
 import "../components/Header";
 import { useNavigate } from "react-router-dom";
 import Logout from "../components/Logout";
-import { useEffect, useState } from "react";
-import isAuthenticated from "../service/auth/isAuthenticated"
+import { useState, useEffect } from "react";
 
 export default function Restaurant() {
-  const { restaurants } = useRestaurant()
-  const navigate = useNavigate()
+  const { restaurants, isLoading, isError } = useRestaurant();
+  const navigate = useNavigate();
 
   const handleCardClick = (restaurant) => {
     console.log(restaurant);
     navigate("/dinners", { state: { selectedRestaurant: restaurant } });
   };
 
-  useEffect(() => {
-    isAuthenticated
-  }, []);
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+  
+  if (isError) {
+    return <p>Failed to load restaurants.</p>;
+  }
 
   return (
     <>
@@ -25,7 +28,7 @@ export default function Restaurant() {
         <h1>Restaurants</h1>
         <Logout />
       </header>
-      <div style={{ margin: 100 }} className="flex-container" update={update}>
+      <div style={{ margin: 100 }} className="flex-container">
         <div className="cards">
           {restaurants.map((restaurant) => (
             <div

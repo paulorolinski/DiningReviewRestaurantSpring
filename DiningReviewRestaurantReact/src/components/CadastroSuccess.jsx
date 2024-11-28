@@ -16,7 +16,7 @@ export default function LoginError({open, setOpen}) {
   return (
     <>
         <Dialog open={open} onClose={handleClose}>
-          <DialogTitle>{"Login feito com sucesso!"}</DialogTitle>
+          <DialogTitle>{"Cadastro feito com sucesso!"}</DialogTitle>
           <DialogContent>
             <DialogContentText>
               Aproveite o app!

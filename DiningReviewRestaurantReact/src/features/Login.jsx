@@ -2,10 +2,10 @@ import "../assets/login.css";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdAlternateEmail } from "react-icons/md";
 import signIn from "../service/auth/signIn";
-import checkToken from "../service/auth/checkToken";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Unauthorized from "../components/Unauthorized";
+import checkToken from "../service/auth/checkToken";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -16,8 +16,8 @@ export default function Login() {
     e.preventDefault();
     const login = e.target.loguser.value;
     const password = e.target.logpass.value;
-    await signIn(login, password);
-    if (checkToken()) {
+    const success = await signIn(login, password);
+    if (success && checkToken()) {
       navigate("/restaurants")
     } else {
       setOpen(true);

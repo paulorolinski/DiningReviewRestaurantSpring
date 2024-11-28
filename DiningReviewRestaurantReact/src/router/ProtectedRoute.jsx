@@ -1,12 +1,8 @@
-import React, { useEffect } from "react";
 import { Navigate, Outlet } from "react-router-dom";
+import checkToken from "../service/auth/checkToken";
 
-const ProtectedRoute = ({ isAuthenticated }) => {
-  if (!isAuthenticated) {
-    return <Navigate to="/" replace />;
-  }
-
-  return <Outlet />;
+const ProtectedRoute = () => {
+  return checkToken() ? <Outlet/> : <Navigate to="/login" replace />;
 }
 
 export default ProtectedRoute;

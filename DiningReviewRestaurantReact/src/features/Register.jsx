@@ -6,10 +6,10 @@ import { MdAlternateEmail } from "react-icons/md";
 import { useState } from "react";
 import signUp from "../service/auth/signUp";
 import LoginError from "../components/LoginError";
-import LoginSuccess from "../components/LoginSuccess";
+import LoginSuccess from "../components/CadastroSuccess";
 import signIn from "../service/auth/signIn";
-import checkToken from "../service/auth/checkToken";
 import { useNavigate } from "react-router-dom";
+import checkToken from "../service/auth/checkToken";
 
 export default function Register() {
   const { opened } = location.state || { opened: false };
@@ -23,15 +23,20 @@ export default function Register() {
     const login = e.target.login.value;
     const email = e.target.logEmail.value;
     const phone = e.target.logTel.value;
-    const pass = e.target.logPass.value;
+    const password = e.target.logPass.value;
     const verPass = e.target.logVerPass.value;
 
-    pass == verPass
-      ? signUp(login, pass, phone, email) &&
-        setOpenSuccess(true) &&
-        (await signIn(login, pass)) &&
-        (navigate("/restaurants") ? checkToken() : setOpenError(true))
-      : setOpenError(true);
+    if(password == verPass) {
+      await signUp(login, password, phone, email)
+      const success = await signIn(login, password);
+      if (success && checkToken()) {
+        setOpenSuccess(true)
+      } else {
+        setOpenError(true)
+      }
+    } else {
+      setOpenError(true)
+    }
   }
 
   return (
@@ -54,6 +59,7 @@ export default function Register() {
                 placeholder="Username"
                 id="login"
                 autoComplete="off"
+                required
               />
             </div>
             <div className="field">
@@ -65,6 +71,7 @@ export default function Register() {
                 placeholder="Email"
                 id="logEmail"
                 autoComplete="off"
+                required
               />
             </div>
             <div className="field">
@@ -76,6 +83,7 @@ export default function Register() {
                 placeholder="Telefone"
                 id="logTel"
                 autoComplete="off"
+                required
               />
             </div>
             <div className="field">
