@@ -65,7 +65,7 @@ export default function Register() {
             <div className="field">
               <MdEmail className="input-icon" />
               <input
-                type="text"
+                type="email"
                 name="logemail"
                 className="input-field"
                 placeholder="Email"

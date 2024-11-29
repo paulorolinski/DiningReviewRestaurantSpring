@@ -1,9 +1,7 @@
 body {
   text-align: center;
   height: 100%;
-  display: flex;
-  align-content: center;
-  justify-content: center;
+  margin-top: 1%;
 }
 
 .logo.react {
@@ -17,7 +15,7 @@ body {
   background-size: contain;
   background-repeat: no-repeat;
   animation: logo-spin infinite 20s linear;
-  filter: blur(20px) drop-shadow(0 2em 2em #61dafbaa);
+  filter: blur(100px) drop-shadow(5em 6em 6em #61dafbaa);
 }
 
 @keyframes logo-spin {
@@ -34,53 +32,3 @@ body {
     animation: logo-spin infinite 20s linear;
   }
 }
-
-/* html .background {
-  position: fixed;
-  z-index: -1;
-  height: 100%;
-  margin-top: 10%;
-  margin-left: 50%;
-}
-
-.background {
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.background-item {
-  position: absolute;
-  background-color: transparent;
-  width: calc(var(--i) * 5vmin);
-  aspect-ratio: 1;
-  border-radius: 50%;
-  border: 0.9vmin solid rgb(0, 200, 255);
-  transform-style: preserve-3d;
-  transform: rotateX(70deg) translateZ(50px);
-  animation: my-move 10s ease-in-out calc(var(--i) * 0.08s) infinite;
-  box-shadow: 0px 0px 15px rgb(124, 124, 124),
-    inset 0px 0px 15px rgb(124, 124, 124);
-}
-
-@keyframes my-move {
-  0%,
-  100% {
-    transform: rotateX(70deg) translateZ(50px) translateY(0px);
-    filter: hue-rotate(0deg);
-  }
-
-  50% {
-    transform: rotateX(70deg) translateZ(50px) translateY(-100vmin);
-    filter: hue-rotate(180deg);
-  }
-} */
-
-/* From Uiverse.io by Praashoo7 */
-/* 
-
-   Design by Adrian Kuleszo
-   Number of Keyframes can be increased or decreased based on the smoothness you require.
-   
- */

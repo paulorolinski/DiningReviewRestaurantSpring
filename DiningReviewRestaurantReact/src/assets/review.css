@@ -28,7 +28,7 @@
 }
 
 .card-review:hover {
-  box-shadow: 0 8px 50px 0 #646cff;
+  box-shadow: 0 8px 50px 0 rgb(0, 0, 0);
   cursor: pointer;
   transform: scale(0.98);
 }

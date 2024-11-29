@@ -3,7 +3,6 @@ import "../assets/restaurant.css";
 import "../components/Header";
 import { useNavigate } from "react-router-dom";
 import Logout from "../components/Logout";
-import { useState, useEffect } from "react";
 
 export default function Restaurant() {
   const { restaurants, isLoading, isError } = useRestaurant();

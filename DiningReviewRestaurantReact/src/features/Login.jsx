@@ -17,6 +17,7 @@ export default function Login() {
     const login = e.target.loguser.value;
     const password = e.target.logpass.value;
     const success = await signIn(login, password);
+    
     if (success && checkToken()) {
       navigate("/restaurants")
     } else {
