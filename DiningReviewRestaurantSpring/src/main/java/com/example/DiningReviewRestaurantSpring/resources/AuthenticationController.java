@@ -8,6 +8,7 @@ import com.example.DiningReviewRestaurantSpring.services.TokenService;
 import com.example.DiningReviewRestaurantSpring.repositories.UserRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
