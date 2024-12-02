@@ -21,7 +21,7 @@ export default function LoginError({open, setOpen}) {
           <DialogTitle>{"Não autorizado!"}</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              As senhas precisam ser a mesma!
+              As senhas precisam ser iguais!
             </DialogContentText>
             <DialogActions>
               <Button onClick={handleClose} autoFocus>

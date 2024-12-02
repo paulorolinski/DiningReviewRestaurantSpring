@@ -3,6 +3,7 @@ package com.example.DiningReviewRestaurantSpring.entities;
 import com.example.DiningReviewRestaurantSpring.entities.enums.UserRole;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -24,9 +25,13 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
+
+    @NotNull
     private String login;
     private String phone;
     private String email;
+
+    @NotNull
     private String password;
     private UserRole role;
 

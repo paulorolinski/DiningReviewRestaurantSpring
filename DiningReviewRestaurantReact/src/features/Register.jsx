@@ -31,10 +31,9 @@ export default function Register() {
       const success = await signIn(login, password);
       if (success && checkToken()) {
         setOpenSuccess(true)
-      } else {
-        setOpenError(true)
       }
     } else {
+      console.log("erro2");
       setOpenError(true)
     }
   }
