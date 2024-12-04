@@ -1,5 +1,6 @@
 package com.example.DiningReviewRestaurantSpring.services;
 
+import com.example.DiningReviewRestaurantSpring.entities.DTO.ReviewDTO;
 import com.example.DiningReviewRestaurantSpring.entities.Review;
 import com.example.DiningReviewRestaurantSpring.repositories.ReviewRepository;
 import com.example.DiningReviewRestaurantSpring.services.exceptions.DatabaseException;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ReviewService {
@@ -17,17 +19,20 @@ public class ReviewService {
     @Autowired
     private ReviewRepository repository;
 
-    public List<Review> findAll() {
-        return repository.findAll();
+    public List<ReviewDTO> findAll() {
+        List<Review> reviews = repository.findAll();
+        return reviews.stream().map(this::toReviewDTO).collect(Collectors.toList());
     }
 
-    public Review findById(Long id) {
+    public ReviewDTO findById(Long id) {
         Optional<Review> obj = repository.findById(id);
-        return obj.orElseThrow(() -> new ResourceNotFoundException(id));
+        Review review = obj.orElseThrow(() -> new ResourceNotFoundException(id));
+        return toReviewDTO(review);
     }
 
-    public Review insert(Review obj) {
-        return repository.save(obj);
+    public ReviewDTO insert(Review obj) {
+        repository.save(obj);
+        return toReviewDTO(obj);
     }
 
     public void delete(Long id) {
@@ -42,17 +47,22 @@ public class ReviewService {
         }
     }
 
-    public Review update(Long id, Review obj) {
+    public ReviewDTO update(Long id, ReviewDTO obj) {
         if (repository.existsById(id)) {
             Review entity = repository.getReferenceById(id);
             updateData(entity, obj);
-            return repository.save(entity);
+            repository.save(entity);
+            return toReviewDTO(entity);
         }
         return null;
     }
 
-    public void updateData(Review entity, Review obj) {
-        entity.setComment(obj.getComment());
-        entity.setRating(obj.getRating());
+    public void updateData(Review entity, ReviewDTO obj) {
+        entity.setComment(obj.comment());
+        entity.setRating(obj.rating());
+    }
+
+    private ReviewDTO toReviewDTO(Review review) {
+        return new ReviewDTO(review.getId(), review.getComment(), review.getRating());
     }
 }

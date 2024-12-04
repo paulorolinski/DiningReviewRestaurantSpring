@@ -1,5 +1,6 @@
 package com.example.DiningReviewRestaurantSpring.resources;
 
+import com.example.DiningReviewRestaurantSpring.entities.DTO.ReviewDTO;
 import com.example.DiningReviewRestaurantSpring.entities.Review;
 import com.example.DiningReviewRestaurantSpring.services.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,31 +17,31 @@ public class ReviewController {
     ReviewService service;
 
     @GetMapping
-    public ResponseEntity<List<Review>> findAll() {
-        List<Review> list = service.findAll();
+    public ResponseEntity<List<ReviewDTO>> findAll() {
+        List<ReviewDTO> list = service.findAll();
         return ResponseEntity.ok().body(list);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Review> findById(@PathVariable Long id) {
-        Review obj = service.findById(id);
+    public ResponseEntity<ReviewDTO> findById(@PathVariable Long id) {
+        ReviewDTO obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
     }
 
     @PostMapping
-    public ResponseEntity<Review> insert(@RequestBody Review obj) {
-        obj = service.insert(obj);
-        return ResponseEntity.ok().body(obj);
+    public ResponseEntity<ReviewDTO> insert(@RequestBody Review obj) {
+        ReviewDTO reviewDTO = service.insert(obj);
+        return ResponseEntity.ok().body(reviewDTO);
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<String> delete(@PathVariable Long id) {
         service.delete(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body("Deletado com sucelson!");
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Review> update(@PathVariable Long id, @RequestBody Review obj) {
+    public ResponseEntity<ReviewDTO> update(@PathVariable Long id, @RequestBody ReviewDTO obj) {
         obj = service.update(id, obj);
         return ResponseEntity.ok().body(obj);
     }

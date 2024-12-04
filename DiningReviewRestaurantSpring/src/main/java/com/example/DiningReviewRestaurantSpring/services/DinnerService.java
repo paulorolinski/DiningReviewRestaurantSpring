@@ -1,5 +1,6 @@
 package com.example.DiningReviewRestaurantSpring.services;
 
+import com.example.DiningReviewRestaurantSpring.entities.DTO.DinnerDTO;
 import com.example.DiningReviewRestaurantSpring.entities.Dinner;
 import com.example.DiningReviewRestaurantSpring.repositories.DinnerRepository;
 import com.example.DiningReviewRestaurantSpring.services.exceptions.DatabaseException;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class DinnerService {
@@ -17,17 +19,20 @@ public class DinnerService {
     @Autowired
     private DinnerRepository repository;
 
-    public List<Dinner> findAll() {
-        return repository.findAll();
+    public List<DinnerDTO> findAll() {
+        List<Dinner> dinners = repository.findAll();
+        return dinners.stream().map(this::toDinnerDTO).collect(Collectors.toList());
     }
 
-    public Dinner findById(Long id) {
+    public DinnerDTO findById(Long id) {
         Optional<Dinner> obj = repository.findById(id);
-        return obj.orElseThrow(() -> new ResourceNotFoundException(id));
+        Dinner dinner = obj.orElseThrow(() -> new ResourceNotFoundException(id));
+        return toDinnerDTO(dinner);
     }
 
-    public Dinner insert(Dinner obj) {
-        return repository.save(obj);
+    public DinnerDTO insert(Dinner obj) {
+        repository.save(obj);
+        return toDinnerDTO(obj);
     }
 
     public void delete(Long id) {
@@ -42,18 +47,23 @@ public class DinnerService {
         }
     }
 
-    public Dinner update(Long id, Dinner obj) {
+    public DinnerDTO update(Long id, DinnerDTO obj) {
         if (repository.existsById(id)) {
             Dinner entity = repository.getReferenceById(id);
             updateData(entity, obj);
-            return repository.save(entity);
+            repository.save(entity);
+            return toDinnerDTO(entity);
         }
         return null;
     }
 
-    public void updateData(Dinner entity, Dinner obj) {
-        entity.setName(obj.getName());
-        entity.setPrice(obj.getPrice());
-        entity.setImgUrl(obj.getImgUrl());
+    public void updateData(Dinner entity, DinnerDTO obj) {
+        entity.setName(obj.name());
+        entity.setPrice(obj.price());
+        entity.setImgUrl(obj.imgUrl());
+    }
+
+    public DinnerDTO toDinnerDTO(Dinner dinner) {
+        return new DinnerDTO(dinner.getId(), dinner.getName(), dinner.getPrice(), dinner.getImgUrl());
     }
 }
