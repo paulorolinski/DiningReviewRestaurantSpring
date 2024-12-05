@@ -1,4 +1,4 @@
-package com.example.DiningReviewRestaurantSpring.resources.exceptions;
+package com.example.DiningReviewRestaurantSpring.controllers.exceptions;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;

@@ -1,4 +1,4 @@
-package com.example.DiningReviewRestaurantSpring.resources;
+package com.example.DiningReviewRestaurantSpring.controllers;
 
 import com.example.DiningReviewRestaurantSpring.entities.DTO.UserDTO;
 import com.example.DiningReviewRestaurantSpring.entities.User;

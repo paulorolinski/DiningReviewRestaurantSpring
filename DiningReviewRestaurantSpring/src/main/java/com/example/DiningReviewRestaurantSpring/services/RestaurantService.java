@@ -64,7 +64,7 @@ public class RestaurantService {
         entity.setImgUrl(obj.imgUrl());
     }
 
-    private RestaurantDTO toRestaurantDTO(Restaurant restaurant) {
+    RestaurantDTO toRestaurantDTO(Restaurant restaurant) {
         return new RestaurantDTO(restaurant.getId(), restaurant.getName(), restaurant.getCep(), restaurant.getAddress(), restaurant.getImgUrl());
     }
 }

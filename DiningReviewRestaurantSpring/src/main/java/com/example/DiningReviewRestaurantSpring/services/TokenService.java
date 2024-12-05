@@ -42,7 +42,6 @@ public class TokenService {
         } catch(JWTVerificationException e) {
             throw new RuntimeException("Error while validate token", e);
         }
-
     }
 
     private Instant genExpirationDate() {

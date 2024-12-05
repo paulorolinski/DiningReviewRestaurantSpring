@@ -33,14 +33,14 @@ public class SecurityConfiguration implements WebMvcConfigurer {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource))
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-//                .authorizeHttpRequests(authorize -> authorize
-//                        .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
-//                        .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
-//                        .requestMatchers(HttpMethod.POST, "/restaurants").hasRole("ADMIN")
-//                        .requestMatchers(HttpMethod.POST, "/dinners").hasRole("ADMIN")
-//                        .requestMatchers(HttpMethod.POST, "/users").hasRole("ADMIN")
-//                       .anyRequest().authenticated()
-//                )
+                .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/restaurants").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/dinners").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/users").hasRole("ADMIN")
+                       .anyRequest().authenticated()
+                )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }

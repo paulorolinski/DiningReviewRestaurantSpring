@@ -20,7 +20,7 @@ public class UserService {
     private UserRepository repository;
 
     public List<UserDTO> findAll() {
-        List<User> users =  repository.findAll();
+        List<User> users = repository.findAll();
         return users.stream().map(this::toUserDTO).collect(Collectors.toList());
     }
 
@@ -37,7 +37,7 @@ public class UserService {
 
     public void delete(String id) {
         try {
-            if(repository.existsById(id)) {
+            if (repository.existsById(id)) {
                 repository.deleteById(id);
             } else {
                 throw new ResourceNotFoundUserException(id);
@@ -53,8 +53,9 @@ public class UserService {
             updateData(entity, obj);
             repository.save(entity);
             return toUserDTO(entity);
+        } else {
+            throw new ResourceNotFoundUserException(id);
         }
-        return null;
     }
 
     public void updateData(User entity, UserDTO obj) {
@@ -64,7 +65,7 @@ public class UserService {
         entity.setRole(obj.role());
     }
 
-    private UserDTO toUserDTO(User user) {
+    UserDTO toUserDTO(User user) {
         return new UserDTO(user.getId(), user.getLogin(), user.getPhone(), user.getEmail(), user.getPassword(), user.getRole());
     }
 }
