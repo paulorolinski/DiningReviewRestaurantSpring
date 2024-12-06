@@ -6,15 +6,12 @@ import com.example.DiningReviewRestaurantSpring.entities.enums.UserRole;
 import com.example.DiningReviewRestaurantSpring.repositories.UserRepository;
 import com.example.DiningReviewRestaurantSpring.services.exceptions.DatabaseException;
 import com.example.DiningReviewRestaurantSpring.services.exceptions.ResourceNotFoundUserException;
-import org.aspectj.lang.annotation.After;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.dao.DataIntegrityViolationException;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
