@@ -5,6 +5,7 @@ import com.example.DiningReviewRestaurantSpring.entities.User;
 import com.example.DiningReviewRestaurantSpring.entities.enums.UserRole;
 import com.example.DiningReviewRestaurantSpring.repositories.UserRepository;
 import com.example.DiningReviewRestaurantSpring.services.exceptions.DatabaseException;
+import com.example.DiningReviewRestaurantSpring.services.exceptions.ResourceNotFoundException;
 import com.example.DiningReviewRestaurantSpring.services.exceptions.ResourceNotFoundUserException;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -99,6 +100,14 @@ class UserServiceTest {
         doThrow(DataIntegrityViolationException.class).when(userRepository).deleteById(anyString());
 
         assertThrows(DatabaseException.class, () -> userService.delete("1"));
+    }
+
+    @Test
+    @DisplayName("Should throw a exception when review not found in update")
+    void ExceptionWhenUpdate() {
+        when(userRepository.existsById(anyString())).thenReturn(false);
+
+        assertThrows(ResourceNotFoundUserException.class, () -> userService.update("1", userDTO));
     }
 
     @Test

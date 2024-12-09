@@ -37,11 +37,10 @@ public class ReviewService {
 
     public void delete(Long id) {
         try {
-            if(repository.existsById(id)) {
-                repository.deleteById(id);
-            } else {
+            if (!repository.existsById(id)) {
                 throw new ResourceNotFoundException(id);
             }
+            repository.deleteById(id);
         } catch (DataIntegrityViolationException e) {
             throw new DatabaseException(e.getMessage());
         }
@@ -54,7 +53,7 @@ public class ReviewService {
             repository.save(entity);
             return toReviewDTO(entity);
         }
-        return null;
+        throw new ResourceNotFoundException(id);
     }
 
     public void updateData(Review entity, ReviewDTO obj) {

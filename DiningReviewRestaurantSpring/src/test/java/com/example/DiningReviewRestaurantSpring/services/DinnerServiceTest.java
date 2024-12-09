@@ -97,6 +97,14 @@ class DinnerServiceTest {
     }
 
     @Test
+    @DisplayName("Should throw a exception when review not found in update")
+    void ExceptionWhenUpdate() {
+        when(dinnerRepository.existsById(anyLong())).thenReturn(false);
+
+        assertThrows(ResourceNotFoundException.class, () -> dinnerService.update(1L, dinnerDTO));
+    }
+
+    @Test
     @DisplayName("Should update Dinner and Return DinnerDTO")
     void update() {
         when(dinnerRepository.existsById(anyLong())).thenReturn(true);

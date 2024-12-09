@@ -5,6 +5,7 @@ import com.example.DiningReviewRestaurantSpring.entities.Restaurant;
 import com.example.DiningReviewRestaurantSpring.repositories.RestaurantRepository;
 import com.example.DiningReviewRestaurantSpring.services.exceptions.DatabaseException;
 import com.example.DiningReviewRestaurantSpring.services.exceptions.ResourceNotFoundException;
+import com.example.DiningReviewRestaurantSpring.services.exceptions.ResourceNotFoundUserException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -37,11 +38,10 @@ public class RestaurantService {
 
     public void delete(Long id) {
         try {
-            if(repository.existsById(id)) {
-                repository.deleteById(id);
-            } else {
+            if (!repository.existsById(id)) {
                 throw new ResourceNotFoundException(id);
             }
+            repository.deleteById(id);
         } catch (DataIntegrityViolationException e) {
             throw new DatabaseException(e.getMessage());
         }
@@ -54,7 +54,7 @@ public class RestaurantService {
             repository.save(entity);
             return toRestaurantDTO(entity);
         }
-        return null;
+        throw new ResourceNotFoundException(id);
     }
 
     public void updateData(Restaurant entity, RestaurantDTO obj) {

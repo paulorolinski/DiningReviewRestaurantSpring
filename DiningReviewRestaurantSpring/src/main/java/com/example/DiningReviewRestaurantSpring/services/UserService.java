@@ -37,11 +37,10 @@ public class UserService {
 
     public void delete(String id) {
         try {
-            if (repository.existsById(id)) {
-                repository.deleteById(id);
-            } else {
+            if (!repository.existsById(id)) {
                 throw new ResourceNotFoundUserException(id);
             }
+            repository.deleteById(id);
         } catch (DataIntegrityViolationException e) {
             throw new DatabaseException(e.getMessage());
         }
@@ -53,9 +52,8 @@ public class UserService {
             updateData(entity, obj);
             repository.save(entity);
             return toUserDTO(entity);
-        } else {
-            throw new ResourceNotFoundUserException(id);
         }
+        throw new ResourceNotFoundUserException(id);
     }
 
     public void updateData(User entity, UserDTO obj) {
