@@ -127,16 +127,4 @@ class RestaurantServiceTest {
         assertEquals("newAddress", restaurant.getAddress());
         assertEquals("newImgUrl", restaurant.getImgUrl());
     }
-
-    @Test
-    @DisplayName("Should convert Restaurant to RestaurantDTO correctly")
-    void toRestaurantDTO_ShouldConvertRestaurantToRestaurantDTO() {
-        RestaurantDTO restaurantDTO = restaurantService.toRestaurantDTO(restaurant);
-        assertNotNull(restaurantDTO);
-        assertEquals(restaurant.getId(), restaurantDTO.id());
-        assertEquals(restaurant.getName(), restaurantDTO.name());
-        assertEquals(restaurant.getCep(), restaurantDTO.cep());
-        assertEquals(restaurant.getAddress(), restaurantDTO.address());
-        assertEquals(restaurant.getImgUrl(), restaurantDTO.imgUrl());
-    }
 }

@@ -61,7 +61,7 @@ public class ReviewService {
         entity.setRating(obj.rating());
     }
 
-    ReviewDTO toReviewDTO(Review review) {
+    private ReviewDTO toReviewDTO(Review review) {
         return new ReviewDTO(review.getId(), review.getComment(), review.getRating());
     }
 }

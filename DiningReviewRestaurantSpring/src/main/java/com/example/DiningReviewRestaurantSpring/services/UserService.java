@@ -63,7 +63,7 @@ public class UserService {
         entity.setRole(obj.role());
     }
 
-    UserDTO toUserDTO(User user) {
+    private UserDTO toUserDTO(User user) {
         return new UserDTO(user.getId(), user.getLogin(), user.getPhone(), user.getEmail(), user.getPassword(), user.getRole());
     }
 }

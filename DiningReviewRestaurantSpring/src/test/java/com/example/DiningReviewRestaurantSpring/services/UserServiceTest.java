@@ -134,17 +134,4 @@ class UserServiceTest {
         assertEquals("newEmail", user.getEmail());
         assertEquals(UserRole.USER, user.getRole());
     }
-
-    @Test
-    @DisplayName("Should convert User to UserDTO correctly")
-    void toUserDTO_ShouldConvertUserToUserDTO() {
-        UserDTO userDTO = userService.toUserDTO(user);
-        assertNotNull(userDTO);
-        assertEquals(user.getId(), userDTO.id());
-        assertEquals(user.getLogin(), userDTO.login());
-        assertEquals(user.getPhone(), userDTO.phone());
-        assertEquals(user.getEmail(), userDTO.email());
-        assertEquals(user.getPassword(), userDTO.password());
-        assertEquals(user.getRole(), userDTO.role());
-    }
 }

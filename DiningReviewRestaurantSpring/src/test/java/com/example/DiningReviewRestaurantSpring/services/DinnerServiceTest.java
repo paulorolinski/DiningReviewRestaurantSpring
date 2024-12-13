@@ -126,15 +126,4 @@ class DinnerServiceTest {
         assertEquals(25.7, dinner.getPrice());
         assertEquals("newImgUrl", dinner.getImgUrl());
     }
-
-    @Test
-    @DisplayName("Should convert Dinner to DinnerDTO correctly")
-    void toDinnerDTO_ShouldConvertDinnerToDinnerDTO() {
-        DinnerDTO dinnerDTO = dinnerService.toDinnerDTO(dinner);
-        assertNotNull(dinnerDTO);
-        assertEquals(dinner.getId(), dinnerDTO.id());
-        assertEquals(dinner.getName(), dinnerDTO.name());
-        assertEquals(dinner.getPrice(), dinnerDTO.price());
-        assertEquals(dinner.getImgUrl(), dinnerDTO.imgUrl());
-    }
 }

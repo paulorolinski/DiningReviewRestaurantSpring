@@ -62,7 +62,7 @@ public class DinnerService {
         entity.setImgUrl(obj.imgUrl());
     }
 
-    public DinnerDTO toDinnerDTO(Dinner dinner) {
+    private DinnerDTO toDinnerDTO(Dinner dinner) {
         return new DinnerDTO(dinner.getId(), dinner.getName(), dinner.getPrice(), dinner.getImgUrl());
     }
 }

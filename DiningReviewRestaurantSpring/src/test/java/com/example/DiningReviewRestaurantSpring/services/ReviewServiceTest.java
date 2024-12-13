@@ -124,14 +124,4 @@ class ReviewServiceTest {
         assertEquals("Comentário 2", review.getComment());
         assertEquals(5.0, review.getRating());
     }
-
-    @Test
-    @DisplayName("Should convert Review to ReviewDTO correctly")
-    void toReviewDTO_ShouldConvertReviewToReviewDTO() {
-        ReviewDTO reviewDTO = reviewService.toReviewDTO(review);
-        assertNotNull(reviewDTO);
-        assertEquals(review.getId(), reviewDTO.id());
-        assertEquals(review.getComment(), reviewDTO.comment());
-        assertEquals(review.getRating(), reviewDTO.rating());
-    }
 }
