@@ -5,6 +5,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.example.DiningReviewRestaurantSpring.entities.User;
+import com.example.DiningReviewRestaurantSpring.services.exceptions.InvalidTokenException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -40,7 +41,7 @@ public class TokenService {
                     .verify(token)
                     .getSubject();
         } catch(JWTVerificationException e) {
-            throw new RuntimeException("Error while validate token", e);
+            throw new InvalidTokenException(e.getMessage());
         }
     }
 

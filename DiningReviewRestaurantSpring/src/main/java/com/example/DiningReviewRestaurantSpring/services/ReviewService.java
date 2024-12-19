@@ -5,6 +5,7 @@ import com.example.DiningReviewRestaurantSpring.entities.Review;
 import com.example.DiningReviewRestaurantSpring.repositories.ReviewRepository;
 import com.example.DiningReviewRestaurantSpring.services.exceptions.DatabaseException;
 import com.example.DiningReviewRestaurantSpring.services.exceptions.ResourceNotFoundException;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -30,9 +31,10 @@ public class ReviewService {
         return toReviewDTO(review);
     }
 
-    public ReviewDTO insert(Review obj) {
-        repository.save(obj);
-        return toReviewDTO(obj);
+    public ReviewDTO insert(@Valid ReviewDTO obj) {
+        Review review = toReview(obj);
+        repository.save(review);
+        return toReviewDTO(review);
     }
 
     public void delete(Long id) {
@@ -63,5 +65,9 @@ public class ReviewService {
 
     private ReviewDTO toReviewDTO(Review review) {
         return new ReviewDTO(review.getId(), review.getComment(), review.getRating());
+    }
+
+    private Review toReview(ReviewDTO reviewDTO) {
+        return new Review(reviewDTO.id(), reviewDTO.comment(), reviewDTO.rating());
     }
 }

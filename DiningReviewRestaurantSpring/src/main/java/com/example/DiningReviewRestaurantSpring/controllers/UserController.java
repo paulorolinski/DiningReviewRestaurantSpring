@@ -3,7 +3,10 @@ package com.example.DiningReviewRestaurantSpring.controllers;
 import com.example.DiningReviewRestaurantSpring.entities.DTO.UserDTO;
 import com.example.DiningReviewRestaurantSpring.entities.User;
 import com.example.DiningReviewRestaurantSpring.services.UserService;
+import jakarta.validation.Valid;
+import org.aspectj.lang.annotation.Before;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,9 +32,9 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserDTO> insert(@RequestBody User obj) {
-        UserDTO userDTO = service.insert(obj);
-        return ResponseEntity.ok().body(userDTO);
+    @ResponseStatus(HttpStatus.OK)
+    public UserDTO insert(@Valid @RequestBody UserDTO obj) {
+        return service.insert(obj);
     }
 
     @DeleteMapping(value = "/{id}")
@@ -41,9 +44,9 @@ public class UserController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<UserDTO> update(@PathVariable String id, @RequestBody UserDTO obj) {
-        UserDTO userDTO = service.update(id, obj);
-        return ResponseEntity.ok().body(userDTO);
+    @ResponseStatus(HttpStatus.OK)
+    public UserDTO update(@PathVariable String id, @Valid @RequestBody UserDTO obj) {
+        return service.update(id, obj);
     }
 
 }

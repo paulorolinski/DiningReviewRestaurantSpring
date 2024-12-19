@@ -3,6 +3,7 @@ package com.example.DiningReviewRestaurantSpring.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.io.Serializable;
@@ -18,9 +19,7 @@ public class Review implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String comment;
-
     private Double rating;
 
     @JsonIgnoreProperties("authority")
@@ -32,4 +31,10 @@ public class Review implements Serializable {
     @ManyToOne
     @JoinColumn(name = "dinner_id")
     private Dinner plate;
+
+    public Review(Long id, String comment, Double rating) {
+        this.id = id;
+        this.comment = comment;
+        this.rating = rating;
+    }
 }

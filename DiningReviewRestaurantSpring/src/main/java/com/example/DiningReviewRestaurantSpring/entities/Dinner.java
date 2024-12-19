@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -31,4 +32,11 @@ public class Dinner {
     @ManyToOne
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
+
+    public Dinner(Long id, String name, Double price, String imgUrl) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.imgUrl = imgUrl;
+    }
 }

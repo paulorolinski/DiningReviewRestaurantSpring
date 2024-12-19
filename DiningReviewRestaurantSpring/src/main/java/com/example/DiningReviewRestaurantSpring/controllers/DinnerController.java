@@ -2,8 +2,10 @@ package com.example.DiningReviewRestaurantSpring.controllers;
 
 import com.example.DiningReviewRestaurantSpring.entities.DTO.DinnerDTO;
 import com.example.DiningReviewRestaurantSpring.entities.Dinner;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.example.DiningReviewRestaurantSpring.services.DinnerService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,9 +31,9 @@ public class DinnerController {
     }
 
     @PostMapping
-    public ResponseEntity<DinnerDTO> insert(@RequestBody Dinner obj) {
-        DinnerDTO dinnerDTO = service.insert(obj);
-        return ResponseEntity.ok().body(dinnerDTO);
+    @ResponseStatus(HttpStatus.OK)
+    public DinnerDTO insert(@Valid @RequestBody DinnerDTO obj) {
+        return service.insert(obj);
     }
 
     @DeleteMapping(value = "/{id}")
@@ -41,9 +43,9 @@ public class DinnerController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<DinnerDTO> update(@PathVariable Long id, @RequestBody DinnerDTO obj) {
-        obj = service.update(id, obj);
-        return ResponseEntity.ok().body(obj);
+    @ResponseStatus(HttpStatus.OK)
+    public DinnerDTO update(@PathVariable Long id, @Valid @RequestBody DinnerDTO obj) {
+        return service.update(id, obj);
     }
 
 }

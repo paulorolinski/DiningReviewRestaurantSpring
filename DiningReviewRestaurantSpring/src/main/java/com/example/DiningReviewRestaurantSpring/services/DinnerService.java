@@ -2,6 +2,7 @@ package com.example.DiningReviewRestaurantSpring.services;
 
 import com.example.DiningReviewRestaurantSpring.entities.DTO.DinnerDTO;
 import com.example.DiningReviewRestaurantSpring.entities.Dinner;
+import com.example.DiningReviewRestaurantSpring.entities.Restaurant;
 import com.example.DiningReviewRestaurantSpring.repositories.DinnerRepository;
 import com.example.DiningReviewRestaurantSpring.services.exceptions.DatabaseException;
 import com.example.DiningReviewRestaurantSpring.services.exceptions.ResourceNotFoundException;
@@ -30,9 +31,10 @@ public class DinnerService {
         return toDinnerDTO(dinner);
     }
 
-    public DinnerDTO insert(Dinner obj) {
-        repository.save(obj);
-        return toDinnerDTO(obj);
+    public DinnerDTO insert(DinnerDTO obj) {
+        Dinner dinner = toDinner(obj);
+        repository.save(dinner);
+        return toDinnerDTO(dinner);
     }
 
     public void delete(Long id) {
@@ -64,5 +66,9 @@ public class DinnerService {
 
     private DinnerDTO toDinnerDTO(Dinner dinner) {
         return new DinnerDTO(dinner.getId(), dinner.getName(), dinner.getPrice(), dinner.getImgUrl());
+    }
+
+    private Dinner toDinner(DinnerDTO dinnerDTO) {
+        return new Dinner(dinnerDTO.id(), dinnerDTO.name(), dinnerDTO.price(), dinnerDTO.imgUrl());
     }
 }

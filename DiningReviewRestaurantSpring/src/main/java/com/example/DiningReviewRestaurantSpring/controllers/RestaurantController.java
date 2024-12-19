@@ -3,7 +3,9 @@ package com.example.DiningReviewRestaurantSpring.controllers;
 import com.example.DiningReviewRestaurantSpring.entities.DTO.RestaurantDTO;
 import com.example.DiningReviewRestaurantSpring.entities.Restaurant;
 import com.example.DiningReviewRestaurantSpring.services.RestaurantService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,9 +31,9 @@ public class RestaurantController {
     }
 
     @PostMapping
-    public ResponseEntity<RestaurantDTO> insert(@RequestBody Restaurant obj) {
-        RestaurantDTO restaurantDTO = service.insert(obj);
-        return ResponseEntity.ok().body(restaurantDTO);
+    @ResponseStatus(HttpStatus.OK)
+    public RestaurantDTO insert(@Valid @RequestBody RestaurantDTO obj) {
+        return service.insert(obj);
     }
 
     @DeleteMapping(value = "/{id}")
@@ -41,9 +43,9 @@ public class RestaurantController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<RestaurantDTO> update(@PathVariable Long id, @RequestBody RestaurantDTO obj) {
-        obj = service.update(id, obj);
-        return ResponseEntity.ok().body(obj);
+    @ResponseStatus(HttpStatus.OK)
+    public RestaurantDTO update(@PathVariable Long id, @Valid @RequestBody RestaurantDTO obj) {
+        return service.update(id, obj);
     }
 
 }

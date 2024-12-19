@@ -5,6 +5,7 @@ import com.example.DiningReviewRestaurantSpring.entities.User;
 import com.example.DiningReviewRestaurantSpring.repositories.UserRepository;
 import com.example.DiningReviewRestaurantSpring.services.exceptions.DatabaseException;
 import com.example.DiningReviewRestaurantSpring.services.exceptions.ResourceNotFoundUserException;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -30,9 +31,10 @@ public class UserService {
         return toUserDTO(user);
     }
 
-    public UserDTO insert(User obj) {
-        repository.save(obj);
-        return toUserDTO(obj);
+    public UserDTO insert(UserDTO obj) {
+        User user = toUser(obj);
+        repository.save(user);
+        return toUserDTO(user);
     }
 
     public void delete(String id) {
@@ -65,5 +67,9 @@ public class UserService {
 
     private UserDTO toUserDTO(User user) {
         return new UserDTO(user.getId(), user.getLogin(), user.getPhone(), user.getEmail(), user.getPassword(), user.getRole());
+    }
+
+    private User toUser(UserDTO userDTO) {
+        return new User(userDTO.login(), userDTO.password(), userDTO.email(), userDTO.phone(), userDTO.role());
     }
 }

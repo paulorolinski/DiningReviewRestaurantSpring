@@ -1,4 +1,6 @@
 package com.example.DiningReviewRestaurantSpring.entities.DTO;
 
-public record DinnerDTO(Long id, String name, Double price, String imgUrl) {
+import jakarta.validation.constraints.NotNull;
+
+public record DinnerDTO(Long id, @NotNull String name, @NotNull Double price, @NotNull String imgUrl) {
 }
