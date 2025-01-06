@@ -64,10 +64,10 @@ public class ReviewService {
     }
 
     private ReviewDTO toReviewDTO(Review review) {
-        return new ReviewDTO(review.getId(), review.getComment(), review.getRating());
+        return new ReviewDTO(review.getId(), review.getComment(), review.getRating(), review.getUser(), review.getPlate());
     }
 
     private Review toReview(ReviewDTO reviewDTO) {
-        return new Review(reviewDTO.id(), reviewDTO.comment(), reviewDTO.rating());
+        return new Review(reviewDTO.id(), reviewDTO.comment(), reviewDTO.rating(), reviewDTO.user(), reviewDTO.plate());
     }
 }

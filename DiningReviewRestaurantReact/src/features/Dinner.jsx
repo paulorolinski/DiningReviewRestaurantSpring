@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Logout from "../components/Logout";
 
-export default function Review() {
+export default function Dinner() {
   const location = useLocation();
   const { selectedRestaurant } = location.state || {};
   const navigate = useNavigate();

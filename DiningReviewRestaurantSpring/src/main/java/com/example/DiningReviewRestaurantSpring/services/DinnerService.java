@@ -65,10 +65,10 @@ public class DinnerService {
     }
 
     private DinnerDTO toDinnerDTO(Dinner dinner) {
-        return new DinnerDTO(dinner.getId(), dinner.getName(), dinner.getPrice(), dinner.getImgUrl());
+        return new DinnerDTO(dinner.getId(), dinner.getName(), dinner.getPrice(), dinner.getImgUrl(), dinner.getReviews(), dinner.getRestaurant());
     }
 
     private Dinner toDinner(DinnerDTO dinnerDTO) {
-        return new Dinner(dinnerDTO.id(), dinnerDTO.name(), dinnerDTO.price(), dinnerDTO.imgUrl());
+        return new Dinner(dinnerDTO.id(), dinnerDTO.name(), dinnerDTO.price(), dinnerDTO.imgUrl(), dinnerDTO.reviews(), dinnerDTO.restaurant());
     }
 }

@@ -67,10 +67,10 @@ public class RestaurantService {
     }
 
     private RestaurantDTO toRestaurantDTO(Restaurant restaurant) {
-        return new RestaurantDTO(restaurant.getId(), restaurant.getName(), restaurant.getCep(), restaurant.getAddress(), restaurant.getImgUrl());
+        return new RestaurantDTO(restaurant.getId(), restaurant.getName(), restaurant.getCep(), restaurant.getAddress(), restaurant.getImgUrl(), restaurant.getPlates());
     }
 
     private Restaurant toRestaurant(RestaurantDTO restaurantDTO) {
-        return new Restaurant(restaurantDTO.id(), restaurantDTO.name(), restaurantDTO.cep(), restaurantDTO.address(), restaurantDTO.imgUrl());
+        return new Restaurant(restaurantDTO.id(), restaurantDTO.name(), restaurantDTO.cep(), restaurantDTO.address(), restaurantDTO.imgUrl(), restaurantDTO.plates());
     }
 }

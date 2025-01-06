@@ -32,11 +32,4 @@ public class Dinner {
     @ManyToOne
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
-
-    public Dinner(Long id, String name, Double price, String imgUrl) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.imgUrl = imgUrl;
-    }
 }
