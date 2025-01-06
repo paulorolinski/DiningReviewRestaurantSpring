@@ -2,11 +2,9 @@ package com.example.DiningReviewRestaurantSpring.services;
 
 import com.example.DiningReviewRestaurantSpring.entities.DTO.RestaurantDTO;
 import com.example.DiningReviewRestaurantSpring.entities.Restaurant;
-import com.example.DiningReviewRestaurantSpring.entities.Review;
 import com.example.DiningReviewRestaurantSpring.repositories.RestaurantRepository;
 import com.example.DiningReviewRestaurantSpring.services.exceptions.DatabaseException;
 import com.example.DiningReviewRestaurantSpring.services.exceptions.ResourceNotFoundException;
-import com.example.DiningReviewRestaurantSpring.services.exceptions.ResourceNotFoundUserException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;

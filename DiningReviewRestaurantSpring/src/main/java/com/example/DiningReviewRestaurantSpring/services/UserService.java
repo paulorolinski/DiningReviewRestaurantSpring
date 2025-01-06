@@ -5,7 +5,6 @@ import com.example.DiningReviewRestaurantSpring.entities.User;
 import com.example.DiningReviewRestaurantSpring.repositories.UserRepository;
 import com.example.DiningReviewRestaurantSpring.services.exceptions.DatabaseException;
 import com.example.DiningReviewRestaurantSpring.services.exceptions.ResourceNotFoundUserException;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;

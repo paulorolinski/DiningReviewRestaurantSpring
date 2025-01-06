@@ -2,7 +2,6 @@ package com.example.DiningReviewRestaurantSpring.services;
 
 import com.example.DiningReviewRestaurantSpring.entities.DTO.DinnerDTO;
 import com.example.DiningReviewRestaurantSpring.entities.Dinner;
-import com.example.DiningReviewRestaurantSpring.entities.Restaurant;
 import com.example.DiningReviewRestaurantSpring.repositories.DinnerRepository;
 import com.example.DiningReviewRestaurantSpring.services.exceptions.DatabaseException;
 import com.example.DiningReviewRestaurantSpring.services.exceptions.ResourceNotFoundException;

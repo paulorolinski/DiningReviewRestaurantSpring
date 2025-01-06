@@ -1,10 +1,8 @@
 package com.example.DiningReviewRestaurantSpring.entities;
 
-import com.example.DiningReviewRestaurantSpring.entities.DTO.UserDTO;
 import com.example.DiningReviewRestaurantSpring.entities.enums.UserRole;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
