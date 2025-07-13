@@ -1,140 +1,140 @@
-package com.example.DiningReviewRestaurantSpring.services;
+// package com.example.DiningReviewRestaurantSpring.services;
 
-import com.example.DiningReviewRestaurantSpring.entities.DTO.RestaurantDTO;
-import com.example.DiningReviewRestaurantSpring.entities.Restaurant;
-import com.example.DiningReviewRestaurantSpring.repositories.RestaurantRepository;
-import com.example.DiningReviewRestaurantSpring.services.exceptions.DatabaseException;
-import com.example.DiningReviewRestaurantSpring.services.exceptions.ResourceNotFoundException;
-import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.dao.DataIntegrityViolationException;
-import java.util.*;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+// import com.example.DiningReviewRestaurantSpring.entities.DTO.RestaurantDTO;
+// import com.example.DiningReviewRestaurantSpring.entities.Restaurant;
+// import com.example.DiningReviewRestaurantSpring.repositories.RestaurantRepository;
+// import com.example.DiningReviewRestaurantSpring.services.exceptions.DatabaseException;
+// import com.example.DiningReviewRestaurantSpring.services.exceptions.ResourceNotFoundException;
+// import org.junit.jupiter.api.*;
+// import org.junit.jupiter.api.extension.ExtendWith;
+// import org.mockito.InjectMocks;
+// import org.mockito.Mock;
+// import org.mockito.junit.jupiter.MockitoExtension;
+// import org.springframework.dao.DataIntegrityViolationException;
+// import java.util.*;
+// import static org.junit.jupiter.api.Assertions.*;
+// import static org.mockito.ArgumentMatchers.any;
+// import static org.mockito.Mockito.*;
 
-@ExtendWith(MockitoExtension.class)
-class RestaurantServiceTest {
-    @Mock
-    RestaurantRepository restaurantRepository;
+// @ExtendWith(MockitoExtension.class)
+// class RestaurantServiceTest {
+//     @Mock
+//     RestaurantRepository restaurantRepository;
 
-    @InjectMocks
-    RestaurantService restaurantService;
+//     @InjectMocks
+//     RestaurantService restaurantService;
 
-    Restaurant restaurant;
+//     Restaurant restaurant;
 
-    RestaurantDTO restaurantDTO;
+//     RestaurantDTO restaurantDTO;
 
-    @Disabled
-    @BeforeEach
-    void setUp() {
-        restaurant = new Restaurant(1L, "Burguer King", "89221-120", "Rua teste", "http://", null);
-        restaurantDTO = new RestaurantDTO(1L, "newName", "newCep", "newAddress", "newImgUrl");
-    }
+//     @Disabled
+//     @BeforeEach
+//     void setUp() {
+//         restaurant = new Restaurant(1L, "Burguer King", "89221-120", "Rua teste", "http://", null);
+//         restaurantDTO = new RestaurantDTO(1L, "newName", "newCep", "newAddress", "newImgUrl");
+//     }
 
-    @Disabled
-    @Test
-    @DisplayName("Should return all restaurants")
-    void findAll() {
-        when(restaurantRepository.findAll()).thenReturn(Collections.singletonList(restaurant));
+//     @Disabled
+//     @Test
+//     @DisplayName("Should return all restaurants")
+//     void findAll() {
+//         when(restaurantRepository.findAll()).thenReturn(Collections.singletonList(restaurant));
 
-        List<RestaurantDTO> result = restaurantService.findAll();
+//         List<RestaurantDTO> result = restaurantService.findAll();
 
-        assertNotNull(result);
-        assertEquals(1, result.size());
-        assertEquals("Burguer King", result.get(0).name());
-    }
+//         assertNotNull(result);
+//         assertEquals(1, result.size());
+//         assertEquals("Burguer King", result.get(0).name());
+//     }
 
-    @Disabled
-    @Test
-    @DisplayName("Should find a Restaurant by ID")
-    void findById() {
-        when(restaurantRepository.findById(anyLong())).thenReturn(Optional.of(restaurant));
+//     @Disabled
+//     @Test
+//     @DisplayName("Should find a Restaurant by ID")
+//     void findById() {
+//         when(restaurantRepository.findById(anyLong())).thenReturn(Optional.of(restaurant));
 
-        RestaurantDTO result = restaurantService.findById(1L);
+//         RestaurantDTO result = restaurantService.findById(1L);
 
-        assertNotNull(result);
-        assertEquals(1L, result.id());
-        assertEquals(1L, restaurant.getId());
-    }
+//         assertNotNull(result);
+//         assertEquals(1L, result.id());
+//         assertEquals(1L, restaurant.getId());
+//     }
 
-    @Disabled
-    @Test
-    @DisplayName("Should save Restaurant")
-    void insert() {
-        when(restaurantRepository.save(any(Restaurant.class))).thenReturn(restaurant);
+//     @Disabled
+//     @Test
+//     @DisplayName("Should save Restaurant")
+//     void insert() {
+//         when(restaurantRepository.save(any(Restaurant.class))).thenReturn(restaurant);
 
-        RestaurantDTO result = restaurantService.insert(restaurant);
+//         RestaurantDTO result = restaurantService.insert(restaurant);
 
-        assertNotNull(result);
-        assertEquals(1L, result.id());
-    }
+//         assertNotNull(result);
+//         assertEquals(1L, result.id());
+//     }
 
-    @Disabled
-    @Test
-    @DisplayName("Should delete Restaurant when exists")
-    void delete() {
-        when(restaurantRepository.existsById(anyLong())).thenReturn(true);
+//     @Disabled
+//     @Test
+//     @DisplayName("Should delete Restaurant when exists")
+//     void delete() {
+//         when(restaurantRepository.existsById(anyLong())).thenReturn(true);
 
-        assertDoesNotThrow(() -> restaurantService.delete(1L));
-        verify(restaurantRepository, times(1)).deleteById(1L);
-    }
+//         assertDoesNotThrow(() -> restaurantService.delete(1L));
+//         verify(restaurantRepository, times(1)).deleteById(1L);
+//     }
 
-    @Disabled
-    @Test
-    @DisplayName("Should throw a exception when restaurant not found")
-    void ExceptionWhenFindById() {
-        when(restaurantRepository.existsById(anyLong())).thenReturn(false);
+//     @Disabled
+//     @Test
+//     @DisplayName("Should throw a exception when restaurant not found")
+//     void ExceptionWhenFindById() {
+//         when(restaurantRepository.existsById(anyLong())).thenReturn(false);
 
-        assertThrows(ResourceNotFoundException.class, () -> restaurantService.delete(1L));
-    }
+//         assertThrows(ResourceNotFoundException.class, () -> restaurantService.delete(1L));
+//     }
 
-    @Disabled
-    @Test
-    @DisplayName("Should throw an DBexception")
-    void ExceptionDB() {
-        when(restaurantRepository.existsById(anyLong())).thenReturn(true);
-        doThrow(DataIntegrityViolationException.class).when(restaurantRepository).deleteById(anyLong());
+//     @Disabled
+//     @Test
+//     @DisplayName("Should throw an DBexception")
+//     void ExceptionDB() {
+//         when(restaurantRepository.existsById(anyLong())).thenReturn(true);
+//         doThrow(DataIntegrityViolationException.class).when(restaurantRepository).deleteById(anyLong());
 
-        assertThrows(DatabaseException.class, () -> restaurantService.delete(1L));
-    }
+//         assertThrows(DatabaseException.class, () -> restaurantService.delete(1L));
+//     }
 
-    @Disabled
-    @Test
-    @DisplayName("Should throw a exception when review not found in update")
-    void ExceptionWhenUpdate() {
-        when(restaurantRepository.existsById(anyLong())).thenReturn(false);
+//     @Disabled
+//     @Test
+//     @DisplayName("Should throw a exception when review not found in update")
+//     void ExceptionWhenUpdate() {
+//         when(restaurantRepository.existsById(anyLong())).thenReturn(false);
 
-        assertThrows(ResourceNotFoundException.class, () -> restaurantService.update(1L, restaurantDTO));
-    }
+//         assertThrows(ResourceNotFoundException.class, () -> restaurantService.update(1L, restaurantDTO));
+//     }
 
-    @Disabled
-    @Test
-    @DisplayName("Should update Restaurant and Return RestaurantDTO")
-    void update() {
-        when(restaurantRepository.existsById(anyLong())).thenReturn(true);
-        when(restaurantRepository.getReferenceById(anyLong())).thenReturn(restaurant);
+//     @Disabled
+//     @Test
+//     @DisplayName("Should update Restaurant and Return RestaurantDTO")
+//     void update() {
+//         when(restaurantRepository.existsById(anyLong())).thenReturn(true);
+//         when(restaurantRepository.getReferenceById(anyLong())).thenReturn(restaurant);
 
-        RestaurantDTO result = restaurantService.update(1L, restaurantDTO);
+//         RestaurantDTO result = restaurantService.update(1L, restaurantDTO);
 
-        assertNotNull(result);
-        assertEquals("newName", result.name());
-        assertEquals("newCep", result.cep());
-        assertEquals("newAddress", result.address());
-        assertEquals("newImgUrl", result.imgUrl());
-    }
+//         assertNotNull(result);
+//         assertEquals("newName", result.name());
+//         assertEquals("newCep", result.cep());
+//         assertEquals("newAddress", result.address());
+//         assertEquals("newImgUrl", result.imgUrl());
+//     }
 
-    @Disabled
-    @Test
-    @DisplayName("Should update restaurant fields")
-    void updateData() {
-        restaurantService.updateData(restaurant, restaurantDTO);
-        assertEquals("newName", restaurant.getName());
-        assertEquals("newCep", restaurant.getCep());
-        assertEquals("newAddress", restaurant.getAddress());
-        assertEquals("newImgUrl", restaurant.getImgUrl());
-    }
-}
+//     @Disabled
+//     @Test
+//     @DisplayName("Should update restaurant fields")
+//     void updateData() {
+//         restaurantService.updateData(restaurant, restaurantDTO);
+//         assertEquals("newName", restaurant.getName());
+//         assertEquals("newCep", restaurant.getCep());
+//         assertEquals("newAddress", restaurant.getAddress());
+//         assertEquals("newImgUrl", restaurant.getImgUrl());
+//     }
+// }

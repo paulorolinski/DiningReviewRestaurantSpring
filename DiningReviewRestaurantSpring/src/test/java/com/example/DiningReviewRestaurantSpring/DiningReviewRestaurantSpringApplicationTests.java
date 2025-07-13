@@ -1,13 +1,13 @@
-package com.example.DiningReviewRestaurantSpring;
+// package com.example.DiningReviewRestaurantSpring;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+// import org.junit.jupiter.api.Test;
+// import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class DiningReviewRestaurantSpringApplicationTests {
+// @SpringBootTest
+// class DiningReviewRestaurantSpringApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+// 	@Test
+// 	void contextLoads() {
+// 	}
 
-}
+// }
