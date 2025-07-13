@@ -7,7 +7,7 @@ on:
 
 env:
   IMAGE_NAME: opjorr/dining-frontend
-  K8S_REPO: paulorolinski/dining-review-k8s-config
+  K8S_REPO: paulorolinski/DiningReviewRestaurantK8sConfig
   K8S_APP_PATH: frontend
 
 jobs:
