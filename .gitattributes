@@ -1,0 +1,6 @@
+# Normaliza todas as terminações de linha para LF (padrão Linux/Mac)
+* text=auto eol=lf
+
+# Garante que scripts de shell e o mvnw sempre usem LF
+*.sh text eol=lf
+mvnw text eol=lf
