@@ -34,17 +34,17 @@ class UserServiceTest {
 
     UserDTO userDTO;
 
-    @BeforeEach
     @Disabled
+    @BeforeEach
     void setUp() {
         user = new User("login1", "password1", "email1", "phone1", UserRole.USER);
         user.setId("1");
         userDTO = new UserDTO("1", "newLogin", "newPhone", "newEmail", "newPassword", UserRole.USER);
     }
 
+    @Disabled
     @Test
     @DisplayName("Should return all users")
-    @Disabled
     void findAll() {
         when(userRepository.findAll()).thenReturn(Collections.singletonList(user));
 
@@ -55,9 +55,9 @@ class UserServiceTest {
         assertEquals("login1", result.get(0).login());
     }
 
+    @Disabled
     @Test
     @DisplayName("Should find a User by ID")
-    @Disabled
     void findById() {
         when(userRepository.findById(anyString())).thenReturn(Optional.of(user));
 
@@ -68,9 +68,9 @@ class UserServiceTest {
         assertEquals("1", user.getId());
     }
 
+    @Disabled
     @Test
     @DisplayName("Should save User")
-    @Disabled
     void insert() {
         when(userRepository.save(any(User.class))).thenReturn(user);
 
@@ -80,9 +80,9 @@ class UserServiceTest {
         assertEquals("1", result.id());
     }
 
+    @Disabled
     @Test
     @DisplayName("Should delete User when exists")
-    @Disabled
     void delete() {
         when(userRepository.existsById(anyString())).thenReturn(true);
 
@@ -90,18 +90,18 @@ class UserServiceTest {
         verify(userRepository, times(1)).deleteById("1");
     }
 
+    @Disabled
     @Test
     @DisplayName("Should throw a exception when user not found")
-    @Disabled
     void ExceptionWhenFindById() {
         when(userRepository.existsById(anyString())).thenReturn(false);
 
         assertThrows(ResourceNotFoundUserException.class, () -> userService.delete("1"));
     }
 
+    @Disabled
     @Test
     @DisplayName("Should throw an DBexception")
-    @Disabled
     void ExceptionDB() {
         when(userRepository.existsById(anyString())).thenReturn(true);
         doThrow(DataIntegrityViolationException.class).when(userRepository).deleteById(anyString());
@@ -109,18 +109,18 @@ class UserServiceTest {
         assertThrows(DatabaseException.class, () -> userService.delete("1"));
     }
 
+    @Disabled
     @Test
     @DisplayName("Should throw a exception when review not found in update")
-    @Disabled
     void ExceptionWhenUpdate() {
         when(userRepository.existsById(anyString())).thenReturn(false);
 
         assertThrows(ResourceNotFoundUserException.class, () -> userService.update("1", userDTO));
     }
 
+    @Disabled
     @Test
     @DisplayName("Should update User and Return UserDTO")
-    @Disabled
     void update() {
         when(userRepository.existsById(anyString())).thenReturn(true);
         when(userRepository.getReferenceById(anyString())).thenReturn(user);
@@ -134,9 +134,9 @@ class UserServiceTest {
         assertEquals(UserRole.USER, result.role());
     }
 
+    @Disabled
     @Test
     @DisplayName("Should update user fields")
-    @Disabled
     void updateData() {
         userService.updateData(user, userDTO);
         assertEquals("newLogin", user.getLogin());

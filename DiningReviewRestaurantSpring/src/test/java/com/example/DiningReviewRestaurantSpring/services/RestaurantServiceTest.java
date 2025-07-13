@@ -28,16 +28,16 @@ class RestaurantServiceTest {
 
     RestaurantDTO restaurantDTO;
 
-    @BeforeEach
     @Disabled
+    @BeforeEach
     void setUp() {
         restaurant = new Restaurant(1L, "Burguer King", "89221-120", "Rua teste", "http://", null);
         restaurantDTO = new RestaurantDTO(1L, "newName", "newCep", "newAddress", "newImgUrl");
     }
 
+    @Disabled
     @Test
     @DisplayName("Should return all restaurants")
-    @Disabled
     void findAll() {
         when(restaurantRepository.findAll()).thenReturn(Collections.singletonList(restaurant));
 
@@ -48,9 +48,9 @@ class RestaurantServiceTest {
         assertEquals("Burguer King", result.get(0).name());
     }
 
+    @Disabled
     @Test
     @DisplayName("Should find a Restaurant by ID")
-    @Disabled
     void findById() {
         when(restaurantRepository.findById(anyLong())).thenReturn(Optional.of(restaurant));
 
@@ -61,9 +61,9 @@ class RestaurantServiceTest {
         assertEquals(1L, restaurant.getId());
     }
 
+    @Disabled
     @Test
     @DisplayName("Should save Restaurant")
-    @Disabled
     void insert() {
         when(restaurantRepository.save(any(Restaurant.class))).thenReturn(restaurant);
 
@@ -73,9 +73,9 @@ class RestaurantServiceTest {
         assertEquals(1L, result.id());
     }
 
+    @Disabled
     @Test
     @DisplayName("Should delete Restaurant when exists")
-    @Disabled
     void delete() {
         when(restaurantRepository.existsById(anyLong())).thenReturn(true);
 
@@ -83,18 +83,18 @@ class RestaurantServiceTest {
         verify(restaurantRepository, times(1)).deleteById(1L);
     }
 
+    @Disabled
     @Test
     @DisplayName("Should throw a exception when restaurant not found")
-    @Disabled
     void ExceptionWhenFindById() {
         when(restaurantRepository.existsById(anyLong())).thenReturn(false);
 
         assertThrows(ResourceNotFoundException.class, () -> restaurantService.delete(1L));
     }
 
+    @Disabled
     @Test
     @DisplayName("Should throw an DBexception")
-    @Disabled
     void ExceptionDB() {
         when(restaurantRepository.existsById(anyLong())).thenReturn(true);
         doThrow(DataIntegrityViolationException.class).when(restaurantRepository).deleteById(anyLong());
@@ -102,18 +102,18 @@ class RestaurantServiceTest {
         assertThrows(DatabaseException.class, () -> restaurantService.delete(1L));
     }
 
+    @Disabled
     @Test
     @DisplayName("Should throw a exception when review not found in update")
-    @Disabled
     void ExceptionWhenUpdate() {
         when(restaurantRepository.existsById(anyLong())).thenReturn(false);
 
         assertThrows(ResourceNotFoundException.class, () -> restaurantService.update(1L, restaurantDTO));
     }
 
+    @Disabled
     @Test
     @DisplayName("Should update Restaurant and Return RestaurantDTO")
-    @Disabled
     void update() {
         when(restaurantRepository.existsById(anyLong())).thenReturn(true);
         when(restaurantRepository.getReferenceById(anyLong())).thenReturn(restaurant);
@@ -127,9 +127,9 @@ class RestaurantServiceTest {
         assertEquals("newImgUrl", result.imgUrl());
     }
 
+    @Disabled
     @Test
     @DisplayName("Should update restaurant fields")
-    @Disabled
     void updateData() {
         restaurantService.updateData(restaurant, restaurantDTO);
         assertEquals("newName", restaurant.getName());

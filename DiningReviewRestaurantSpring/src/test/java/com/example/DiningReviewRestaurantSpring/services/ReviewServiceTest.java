@@ -29,16 +29,16 @@ class ReviewServiceTest {
 
     ReviewDTO reviewDTO;
 
-    @BeforeEach
     @Disabled
+    @BeforeEach
     void setUp() {
         review = new Review(1L, "Comentário 1", 3.0, null,  null);
         reviewDTO = new ReviewDTO(1L, "Comentário 2", 5.0);
     }
 
+    @Disabled
     @Test
     @DisplayName("Should return all reviews")
-    @Disabled
     void findAll() {
         when(reviewRepository.findAll()).thenReturn(Collections.singletonList(review));
 
@@ -49,9 +49,9 @@ class ReviewServiceTest {
         assertEquals("Comentário 1", result.get(0).comment());
     }
 
+    @Disabled
     @Test
     @DisplayName("Should find a Review by ID")
-    @Disabled
     void findById() {
         when(reviewRepository.findById(anyLong())).thenReturn(Optional.of(review));
 
@@ -62,9 +62,9 @@ class ReviewServiceTest {
         assertEquals(1L, review.getId());
     }
 
+    @Disabled
     @Test
     @DisplayName("Should save Review")
-    @Disabled
     void insert() {
         when(reviewRepository.save(any(Review.class))).thenReturn(review);
 
@@ -74,9 +74,9 @@ class ReviewServiceTest {
         assertEquals(1L, result.id());
     }
 
+    @Disabled
     @Test
     @DisplayName("Should delete Review when exists")
-    @Disabled
     void delete() {
         when(reviewRepository.existsById(anyLong())).thenReturn(true);
 
@@ -84,18 +84,18 @@ class ReviewServiceTest {
         verify(reviewRepository, times(1)).deleteById(1L);
     }
 
+    @Disabled
     @Test
     @DisplayName("Should throw a exception when review not found")
-    @Disabled
     void ExceptionWhenFindById() {
         when(reviewRepository.existsById(anyLong())).thenReturn(false);
 
         assertThrows(ResourceNotFoundException.class, () -> reviewService.delete(1L));
     }
 
+    @Disabled
     @Test
     @DisplayName("Should throw an DBexception")
-    @Disabled
     void ExceptionDB() {
         when(reviewRepository.existsById(anyLong())).thenReturn(true);
         doThrow(DataIntegrityViolationException.class).when(reviewRepository).deleteById(anyLong());
@@ -103,18 +103,18 @@ class ReviewServiceTest {
         assertThrows(DatabaseException.class, () -> reviewService.delete(1L));
     }
 
+    @Disabled
     @Test
     @DisplayName("Should throw a exception when review not found in update")
-    @Disabled
     void ExceptionWhenUpdate() {
         when(reviewRepository.existsById(anyLong())).thenReturn(false);
 
         assertThrows(ResourceNotFoundException.class, () -> reviewService.update(1L, reviewDTO));
     }
 
+    @Disabled
     @Test
     @DisplayName("Should update Review and Return ReviewDTO")
-    @Disabled
     void update() {
         when(reviewRepository.existsById(anyLong())).thenReturn(true);
         when(reviewRepository.getReferenceById(anyLong())).thenReturn(review);
@@ -126,9 +126,9 @@ class ReviewServiceTest {
         assertEquals(5.0, result.rating());
     }
 
+    @Disabled
     @Test
     @DisplayName("Should update review fields")
-    @Disabled
     void updateData() {
         reviewService.updateData(review, reviewDTO);
         assertEquals("Comentário 2", review.getComment());

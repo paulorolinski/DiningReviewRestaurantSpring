@@ -24,44 +24,44 @@ class TokenServiceTest {
     @Mock
     private User mockUser;
 
-    @BeforeEach
     @Disabled
+    @BeforeEach
     void setUp() {
         String secret = "mySecretKey";
         ReflectionTestUtils.setField(tokenService, "secret", secret);
         lenient().when(mockUser.getLogin()).thenReturn("testUser");
     }
 
+    @Disabled
     @Test
     @DisplayName("Should generate a valid token")
-    @Disabled
     void generateToken_ShouldReturnValidToken() {
         String token = tokenService.generateToken(mockUser);
         assertNotNull(token);
         assertFalse(token.isEmpty());
     }
 
+    @Disabled
     @Test
     @DisplayName("Should throw RuntimeException when JWT creation fails")
-    @Disabled
     void generateToken_ShouldThrowExceptionWhenJWTCreationFails() {
         doThrow(JWTCreationException.class).when(mockUser).getLogin();
 
         assertThrows(RuntimeException.class, () -> tokenService.generateToken(mockUser));
     }
 
+    @Disabled
     @Test
     @DisplayName("Should validate a valid token")
-    @Disabled
     void validateToken_ShouldReturnSubjectWhenValid() {
         String token = tokenService.generateToken(mockUser);
         String subject = tokenService.validateToken(token);
         assertEquals("testUser", subject);
     }
 
+    @Disabled
     @Test
     @DisplayName("Should throw RuntimeException when JWT validation fails")
-    @Disabled
     void validateToken_ShouldThrowExceptionWhenInvalidToken() {
         String invalidToken = "invalidToken";
         assertThrows(RuntimeException.class, () -> tokenService.validateToken(invalidToken));

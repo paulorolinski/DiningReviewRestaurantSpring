@@ -28,17 +28,17 @@ class AuthorizathionServiceTest {
 
     User mockUser;
 
-    @BeforeEach
     @Disabled
+    @BeforeEach
     void setUp() {
         mockUser = new User();
         mockUser.setLogin("testUser");
         mockUser.setPassword("testPassword");
     }
 
+    @Disabled
     @Test
     @DisplayName("Should load an User by his Username")
-    @Disabled
     void loadUserByUsername_ShouldReturnUserDetails() {
         when(userRepository.findByLogin(anyString())).thenReturn(mockUser);
 
@@ -48,9 +48,9 @@ class AuthorizathionServiceTest {
         assertEquals(mockUser.getLogin(), userDetails.getUsername());
     }
 
+    @Disabled
     @Test
     @DisplayName("Should throw an UserNameNotFoundException when User not found")
-    @Disabled
     void loadUserByUsername_ShouldThrowExceptionWhenUserNotFound() {
         when(userRepository.findByLogin(anyString())).thenReturn(null);
 
