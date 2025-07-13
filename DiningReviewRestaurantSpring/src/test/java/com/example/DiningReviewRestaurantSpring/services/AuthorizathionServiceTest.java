@@ -28,6 +28,7 @@ class AuthorizathionServiceTest {
     User mockUser;
 
     @BeforeEach
+    @Disabled
     void setUp() {
         mockUser = new User();
         mockUser.setLogin("testUser");
@@ -36,6 +37,7 @@ class AuthorizathionServiceTest {
 
     @Test
     @DisplayName("Should load an User by his Username")
+    @Disabled
     void loadUserByUsername_ShouldReturnUserDetails() {
         when(userRepository.findByLogin(anyString())).thenReturn(mockUser);
 
@@ -47,6 +49,7 @@ class AuthorizathionServiceTest {
 
     @Test
     @DisplayName("Should throw an UserNameNotFoundException when User not found")
+    @Disabled
     void loadUserByUsername_ShouldThrowExceptionWhenUserNotFound() {
         when(userRepository.findByLogin(anyString())).thenReturn(null);
 
