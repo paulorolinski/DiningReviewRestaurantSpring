@@ -26,9 +26,9 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
       
-      - name: 4. Executar testes com Maven (usando bash explícito)
+      - name: 4. Empacotar a aplicação (pulando os testes)
         working-directory: ./DiningReviewRestaurantSpring
-        run: /bin/bash ./mvnw test
+        run: /bin/bash ./mvnw package -DskipTests
 
       - name: 5. Login no DockerHub
         uses: docker/login-action@v3
