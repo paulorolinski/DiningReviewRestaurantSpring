@@ -48,7 +48,7 @@ jobs:
         with:
           repository: ${{ env.K8S_REPO }}
           path: k8s-repo
-          ssh-key: ${{ secrets.GH_PAT }}
+          token: ${{ secrets.GH_PAT }}
 
       - name: 8. Atualizar a imagem no Kustomization
         run: |
