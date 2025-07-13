@@ -8,8 +8,8 @@ on:
   workflow_dispatch:
 
 env:
-  IMAGE_NAME: SEU_NOME_DE_USUARIO_DOCKER/dining-backend
-  K8S_REPO: SEU_USUARIO_GITHUB/dining-review-k8s-config
+  IMAGE_NAME: opjorr/dining-backend
+  K8S_REPO: paulorolinski/dining-review-k8s-config
   K8S_APP_PATH: backend
 
 jobs:
