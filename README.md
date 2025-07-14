@@ -4,131 +4,130 @@ Aplicação completa para avaliação de restaurantes por usuários. Este reposi
 
 - 🎯 Backend em [Spring Boot](https://spring.io/projects/spring-boot)
 - 💻 Frontend em [React](https://react.dev/) com [Vite](https://vitejs.dev/)
+- ⚙️ Provisionamento com [Vagrant](https://www.vagrantup.com/) e [Ansible](https://docs.ansible.com/)
+- ☸️ Orquestração de cluster Kubernetes com [Kind](https://kind.sigs.k8s.io/)
+- 🚀 Deploy GitOps com [Argo CD](https://argo-cd.readthedocs.io/)
+- 📦 Manifests separados em [DiningReviewRestaurantK8sConfig](https://github.com/paulorolinski/DiningReviewRestaurantK8sConfig)
 
 ---
 
 ## 📁 Estrutura do Projeto
 
 ```bash
-DiningReviewRestaurant/
+DiningReviewRestaurantSpring/
 ├── DiningReviewRestaurantReact/     # Frontend em React
-└── DiningReviewRestaurantSpring/    # Backend em Spring Boot
+├── DiningReviewRestaurantSpring/    # Backend em Spring Boot
+├── provisioning/                    # Infraestrutura e automação DevOps
+│   ├── ansible/                     # Playbooks Ansible
+│   ├── kind-cluster.yaml           # Cluster Kubernetes via Kind
+│   └── Vagrantfile                 # Máquina de desenvolvimento
+└── docker-compose.yaml             # Execução local via containers
 ```
 
----
+### Manifests Kubernetes ficam no repositório [DiningReviewRestaurantK8sConfig](https://github.com/seu-usuario/DiningReviewRestaurantK8sConfig) (separado):
+```bash
+DiningReviewRestaurantK8sConfig/
+├── backend/
+├── base/
+├── database/
+├── frontend/
+└── kustomization.yaml              # Agrupamento via Kustomize
+```
 
-## 🚀 Como Rodar o Projeto Localmente
-
-### 🔧 Pré-requisitos
-
-Instale as seguintes ferramentas:
-
-| Ferramenta       | Versão mínima | Link                                                   |
-|------------------|---------------|--------------------------------------------------------|
-| Java             | 17+           | https://adoptium.net/pt/temurin/releases/             |
-| Maven            | 3.8+          | https://maven.apache.org/install.html                 |
-| Node.js + npm    | 18+           | https://nodejs.org/en/download                        |
-| PostgreSQL       | 15+           | https://www.postgresql.org/download/                  |
-
----
-
-### Clonar o Repositório
+## 🛠️ Provisionamento DevOps
+## 🔧 Vagrant + Ansible
+### Cria uma máquina virtual e provisiona dependências para o ambiente de desenvolvimento:
 
 ```bash
-git clone https://github.com/seu-usuario/DiningReviewRestaurant.git
-cd DiningReviewRestaurant
+cd provisioning
+vagrant up
 ```
 
-### Backend: Spring Boot
-Criar o Banco de Dados
-Execute no PostgreSQL:
+>O Vagrant usa uma box com Ubuntu e executa o playbook.yml via Ansible para instalar Docker, PostgreSQL, Java e outras dependências.
 
-```sql 
-CREATE DATABASE diningdb;
-CREATE USER dininguser WITH PASSWORD 'diningpass';
-GRANT ALL PRIVILEGES ON DATABASE diningdb TO dininguser;
-```
+## ☸️ Orquestração com Kubernetes + Kind
+### Cria um cluster local Kubernetes usando Kind e os manifests versionados no outro repositório:
 
-Configurar credenciais
-Edite o arquivo:
-
-```css
-DiningReviewRestaurantSpring/src/main/resources/application.properties
-```
-
-E insira:
-
-```txt
-spring.datasource.url=jdbc:postgresql://localhost:5432/diningdb
-spring.datasource.username=dininguser
-spring.datasource.password=diningpass
-spring.jpa.hibernate.ddl-auto=validate
-spring.profiles.active=dev
-```
-
-Rodar o backend:
 ```bash
+kind create cluster --name dev --config provisioning/kind-cluster.yaml
+```
+
+>É necessário ter o Docker instalado.
+
+## 🐳 Rodar Localmente com Docker
+### Clonar os repositórios
+
+```bash
+git clone https://github.com/seu-usuario/DiningReviewRestaurantSpring.git
+git clone https://github.com/seu-usuario/DiningReviewRestaurantK8sConfig.git
 cd DiningReviewRestaurantSpring
-./mvnw spring-boot:run
 ```
 
-## 💻 Frontend: React + Vite
+### Executar com Docker Compose
+```bash
+docker-compose up
+```
 
-Acessar a pasta
+>Isso sobe o backend, frontend e banco PostgreSQL integrados.
+
+## 🚀 Deploy com Argo CD
+### 1. Instalar Argo CD no cluster Kind
 
 ```bash
-cd ../DiningReviewRestaurantReact
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+kubectl port-forward svc/argocd-server -n argocd 8080:443
 ```
 
-Instalar dependências
+
+Acesse o painel: https://localhost:8080
+
+### 2. Adicionar repositório de manifests
+Via Argo CD Web:
+
+- Vá em Settings → Repositories
+
+- Adicione https://github.com/seu-usuario/DiningReviewRestaurantK8sConfig.git
+
+- Use token pessoal se for privado
+
+### 3. Criar aplicação
+```yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: dining-review
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/seu-usuario/DiningReviewRestaurantK8sConfig.git
+    targetRevision: HEAD
+    path: .
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+```
+
+Aplicar via ```kubectl```:
 ```bash
-npm install
+kubectl apply -f app.yaml
 ```
 
-Iniciar a aplicação
-```bash
-npm run dev
-```
-
-> A aplicação abrirá em: http://localhost:5173
-
-Proxy para a API
-
-O proxy já está configurado no `package.json`:
-```json
-"proxy": "http://localhost:8080"
-```
-
-## Testes
-
-### Backend
-
-Execute:
-
-```bash
-cd DiningReviewRestaurantSpring
-./mvnw test
-```
-
-Os testes estão localizados em:
-```bash
-DiningReviewRestaurantSpring/src/test/java
-```
-
-## 📌 Tecnologias Utilizadas
-- Spring Boot 3
-
+📌 Tecnologias Utilizadas
+- Spring Boot 3 + Maven
 - React 18 + Vite
-
+- PostgreSQL + Flyway 
+- Docker + Docker Compose
+- Kubernetes + Kind
 - JWT + Spring Security
-
-- PostgreSQL / H2
-
-- Flyway
-
 - Zustand + React Query
-
-- Axios + Material UI (MUI)
+- Ansible + Vagrant
+- Argo CD
 
 ## 📬 Contato
 Desenvolvido por [Paulo Rolinski](https://www.linkedin.com/in/paulo-rolinski/)
