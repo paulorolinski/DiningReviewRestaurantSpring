@@ -101,7 +101,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/seu-usuario/DiningReviewRestaurantK8sConfig.git
+    repoURL: https://github.com/paulorolinski/DiningReviewRestaurantK8sConfig.git
     targetRevision: HEAD
     path: .
   destination:
