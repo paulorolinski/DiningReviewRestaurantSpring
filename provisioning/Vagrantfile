@@ -1,0 +1,22 @@
+# provisioning/Vagrantfile (versão final para Docker)
+
+Vagrant.configure("2") do |config|
+  # A linha 'config.vm.box' foi removida.
+  config.vm.box_check_update = false
+
+  config.vm.hostname = "k8s-host"
+  config.vm.network "forwarded_port", guest: 80, host: 8085
+
+  config.vm.provider "docker" do |d|
+    # Esta é a única linha que o provedor Docker precisa para a imagem.
+    d.image = "debian:bookworm"
+    d.privileged = true
+    d.remains_running = true
+    d.cmd = ["/bin/sh", "-c", "while true; do sleep 1; done"]
+  end
+
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "ansible/playbook.yml"
+    ansible.inventory_path = "ansible/inventory"
+  end
+end

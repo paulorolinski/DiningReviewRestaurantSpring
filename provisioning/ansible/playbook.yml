@@ -1,0 +1,70 @@
+---
+- name: Provisionar ambiente Kubernetes com Kind
+  hosts: k8s_host
+  become: yes
+  tasks:
+    - name: Atualizar cache do APT e instalar pacotes de dependência
+      apt:
+        name:
+          - ca-certificates
+          - curl
+          - gnupg
+        state: present
+        update_cache: yes
+
+    - name: Criar diretório para as chaves do Docker
+      file:
+        path: /etc/apt/keyrings
+        state: directory
+        mode: '0755'
+
+    - name: Adicionar a chave GPG oficial do Docker
+      get_url:
+        url: https://download.docker.com/linux/debian/gpg
+        dest: /etc/apt/keyrings/docker.asc
+        mode: '0644'
+        force: yes
+
+    - name: Adicionar o repositório do Docker
+      apt_repository:
+        repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian bookworm stable"
+        state: present
+
+    - name: Instalar Docker Engine
+      apt:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+        state: present
+
+    - name: Adicionar usuário 'vagrant' ao grupo 'docker'
+      user:
+        name: vagrant
+        groups: docker
+        append: yes
+
+    - name: Instalar kubectl
+      get_url:
+        url: "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+        dest: /usr/local/bin/kubectl
+        mode: '0755'
+
+    - name: Instalar Kind
+      get_url:
+        url: "https://kind.sigs.k8s.io/dl/v0.23.0/kind-linux-amd64"
+        dest: /usr/local/bin/kind
+        mode: '0755'
+
+    - name: Copiar arquivo de configuração do Kind para o container
+      copy:
+        src: ../kind-cluster.yaml
+        dest: /home/vagrant/kind-cluster.yaml
+        owner: vagrant
+        group: vagrant
+
+    - name: Criar o cluster com Kind (se ainda não existir)
+      become_user: vagrant
+      command: kind create cluster --config /home/vagrant/kind-cluster.yaml
+      args:
+        creates: /home/vagrant/.kube/config

@@ -1,0 +1,8 @@
+# inventory (versão simplificada)
+[all:vars]
+ansible_user=root
+ansible_remote_tmp=/tmp
+
+# O Vagrant irá automaticamente gerenciar a conexão para a máquina 'default'
+[default]
+default ansible_connection=docker
